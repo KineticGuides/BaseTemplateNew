@@ -1,0 +1,18 @@
+<div class="page-wrapper">
+  <nav class="sidebar-wrapper">
+    <div class="sidebar-brand">
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.svg" alt="Admin Dashboards" />
+      </a>
+    </div>
+    <app-sidebar-menu></app-sidebar-menu>
+  </nav>
+
+  <div class="main-container">
+    <app-page-header></app-page-header>
+    <div class="content-wrapper-scroll">
+          <router-outlet></router-outlet>
+          <app-page-footer></app-page-footer>
+    </div>
+  </div>
+</div>
