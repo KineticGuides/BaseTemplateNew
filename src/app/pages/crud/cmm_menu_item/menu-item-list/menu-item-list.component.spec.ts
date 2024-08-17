@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TemplateAltComponent } from './template-alt.component';
+import { MenuItemListComponent } from './menu-item-list.component';
 
-describe('TemplateAltComponent', () => {
-  let component: TemplateAltComponent;
-  let fixture: ComponentFixture<TemplateAltComponent>;
+describe('MenuItemListComponent', () => {
+  let component: MenuItemListComponent;
+  let fixture: ComponentFixture<MenuItemListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TemplateAltComponent]
+      imports: [MenuItemListComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TemplateAltComponent);
+    fixture = TestBed.createComponent(MenuItemListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

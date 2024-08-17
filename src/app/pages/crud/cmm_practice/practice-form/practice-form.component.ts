@@ -1,17 +1,17 @@
 import { Component, AfterViewInit, OnInit, Input, Output, EventEmitter  } from '@angular/core';
-import { DataService } from '../../data.service';
+import { DataService } from '../../../../data.service'; 
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-template-form',
+  selector: 'app-practice-form',
   standalone: true,
   imports: [CommonModule, RouterLink, FormsModule],
-  templateUrl: './template-form.component.html',
-  styleUrl: './template-form.component.css'
+  templateUrl: './practice-form.component.html',
+  styleUrl: './practice-form.component.css'
 })
-export class TemplateFormComponent implements OnInit, AfterViewInit {
+export class PracticeFormComponent implements OnInit, AfterViewInit {
   
   data: any;
   formData: any = {country: "", languages: ""};
@@ -19,7 +19,7 @@ export class TemplateFormComponent implements OnInit, AfterViewInit {
   keys: any;
   values: any;
 
-  @Input() path: any = 'template-form';
+  @Input() path: any = 'practice-form';
   @Input() id: any = '';
   @Input() id2: any = '';
   @Input() id3: any = '';
@@ -60,17 +60,6 @@ export class TemplateFormComponent implements OnInit, AfterViewInit {
      }
   }
 
-  deleteForm() {
-    if (confirm('Are you sure you want to Delete this record?')) {
-      this._dataService.postData("post-template-delete", this.formData).subscribe((data: any)=> { 
-        //this.data=data;
-        //this.formData=data['formData'];
-        this.closeIt();
-        console.log(this.data)
-      }) 
-    }
-  }
-  
   postForm(): void {
 
     this._dataService.postData("post-template-form", this.formData).subscribe((data: any)=> { 
@@ -82,4 +71,16 @@ export class TemplateFormComponent implements OnInit, AfterViewInit {
 
   }
 
+  deleteForm() {
+    if (confirm('Are you sure you want to Delete this record?')) {
+      this._dataService.postData("post-template-delete", this.formData).subscribe((data: any)=> { 
+        //this.data=data;
+        //this.formData=data['formData'];
+        this.closeIt();
+        console.log(this.data)
+      }) 
+    }
+  }
+  
 }
+

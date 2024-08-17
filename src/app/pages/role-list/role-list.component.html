@@ -26,7 +26,7 @@
         </div>
         @if (adding=='Y') {
         <div class="card-body">
-              <app-template-form [path]="'template-form'" [id]="this.id" (close)="toggleAdd();"></app-template-form>
+              <app-role-form [path]="'role-form'" [id]="this.id" (close)="toggleAdd();"></app-role-form>
         </div>
        }
         <div class="card-body">
@@ -50,7 +50,7 @@
                   <ng-container  *ngFor="let m of data.list | searchFilter: searchText | paginate: { itemsPerPage: 10, currentPage: p }">
                     <tr>
                       <td *ngFor="let q of data.columns">{{ m[q['column']] }}</td>
-                      <td>
+                      <td style="width: 100px;">
                         <button (click)="editItem(m)" class="btn btn-primary">
                           <i class="bi bi-clipboard-plus"></i>
                         </button>
@@ -59,7 +59,7 @@
                     @if (m.edit=='Y') {
                     <tr>
                       <td colspan="7">
-                              <app-template-form [path]="'template-form'" [id]="m.id" (close)="closeEdit(m);"></app-template-form>
+                              <app-role-form [path]="'role-form'" [id]="m.id" (close)="closeEdit(m);"></app-role-form>
                      </td>
                     </tr>
                   }

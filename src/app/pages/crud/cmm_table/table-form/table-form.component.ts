@@ -1,17 +1,18 @@
 import { Component, AfterViewInit, OnInit, Input, Output, EventEmitter  } from '@angular/core';
-import { DataService } from '../../data.service';
+import { DataService } from '../../../../data.service'; 
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+
 @Component({
-  selector: 'app-template-form',
+  selector: 'app-table-form',
   standalone: true,
   imports: [CommonModule, RouterLink, FormsModule],
-  templateUrl: './template-form.component.html',
-  styleUrl: './template-form.component.css'
+  templateUrl: './table-form.component.html',
+  styleUrl: './table-form.component.css'
 })
-export class TemplateFormComponent implements OnInit, AfterViewInit {
+export class TableFormComponent  implements OnInit, AfterViewInit {
   
   data: any;
   formData: any = {country: "", languages: ""};
@@ -19,7 +20,7 @@ export class TemplateFormComponent implements OnInit, AfterViewInit {
   keys: any;
   values: any;
 
-  @Input() path: any = 'template-form';
+  @Input() path: any = 'table-form';
   @Input() id: any = '';
   @Input() id2: any = '';
   @Input() id3: any = '';
