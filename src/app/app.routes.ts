@@ -8,6 +8,8 @@ import { MenuItemListComponent } from './pages/crud/cmm_menu_item/menu-item-list
 import { PracticeListComponent } from './pages/crud/cmm_practice/practice-list/practice-list.component';
 import { TableListComponent } from './pages/crud/cmm_table/table-list/table-list.component';
 import { TableItemListComponent } from './pages/crud/cmm_table/table-item-list/table-item-list.component';
+import { UserListComponent } from './pages/crud/user/user-list/user-list.component';
+
 
 export const routes: Routes = [
     { path: '', component: TemplateHomeComponent, resolve: { data: ResolverService} },
@@ -17,6 +19,7 @@ export const routes: Routes = [
     { path: 'menu-items', component: MenuItemListComponent, resolve: { data: ResolverService} },
     { path: 'roles', component: RoleListComponent, resolve: { data: ResolverService} },
     { path: 'tables', component: TableListComponent, resolve: { data: ResolverService} },
+    { path: 'users', component: UserListComponent, resolve: { data: ResolverService} },
     { path: 'columns', component: TableItemListComponent, resolve: { data: ResolverService} },
     { path: 'template-list', component: TemplateListComponent, resolve: { data: ResolverService}  }
 ];
