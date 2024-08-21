@@ -4,20 +4,20 @@ import { CommonModule } from '@angular/common'
 import { RouterLink } from '@angular/router'
 import { FormsModule } from '@angular/forms'
 @Component({
-  selector: 'app-user-form',
+  selector: 'app-operator-form',
   standalone: true,
    imports: [CommonModule, RouterLink, FormsModule],
-  templateUrl: './user-form.component.html',
-  styleUrl: './user-form.component.css'
+  templateUrl: './operator-form.component.html',
+  styleUrl: './operator-form.component.css'
 })
- export class UserFormComponent implements OnInit, AfterViewInit { 
+ export class OperatorFormComponent implements OnInit, AfterViewInit { 
   data: any;
   formData: any = {country: "", languages: ""};
   colData: any = {country: "", languages: ""};
   keys: any;
   values: any;
 
-  @Input() path: any = 'get-user-form';
+  @Input() path: any = 'get-operator-form';
   @Input() id: any = '';
   @Input() id2: any = '';
   @Input() id3: any = '';
@@ -58,7 +58,7 @@ import { FormsModule } from '@angular/forms'
   }
 
   postForm(): void {
-    this._dataService.postData("post-user-form", this.formData).subscribe((data: any)=> {
+    this._dataService.postData("post-template-form", this.formData).subscribe((data: any)=> {
       this.closeIt();
       console.log(this.data)
   })
@@ -66,10 +66,11 @@ import { FormsModule } from '@angular/forms'
 
   deleteForm(): void {
   if (confirm('Are you sure you want to Delete this record?')) {
-    this._dataService.postData("denlete-template-form", this.formData).subscribe((data: any)=> {
+    this._dataService.postData("delete-template-form", this.formData).subscribe((data: any)=> {
       this.closeIt();
       console.log(this.data)
   })
   }
-}
- }
+  }
+  }
+

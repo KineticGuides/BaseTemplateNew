@@ -12,6 +12,7 @@ export class DataService {
   uid: any;
   url: any;
   menu: any;
+  user: any;
   un: any;
   role: any;
   hashBuffer: any;
@@ -19,6 +20,7 @@ export class DataService {
   constructor(private http: HttpClient) { 
     this.url='https://api.kineticcloud.ai/api/kmd_router.php';
     this.menu='https://api.kineticcloud.ai/api/kmd_menu.php';
+    this.user='https://api.kineticcloud.ai/api/kmd_user.php';
   }
 
   getLocalStorage() {
@@ -66,6 +68,18 @@ export class DataService {
     }
   
   this.t= this.http.post(this.menu, data);
+  return this.t;
+
+  }
+
+  getUser() {
+
+    this.getLocalStorage();
+    const data = {    
+      "uid": this.uid
+    }
+  
+  this.t= this.http.post(this.user, data);
   return this.t;
 
   }
