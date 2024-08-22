@@ -1,21 +1,21 @@
-<div class="content-wrapper">
-  <div class="row">
-    <div class="col-xxl-12 col-sm-12 col-12">
-      <div style="min-height: 900px;" class="card">
-        <div class="card-header">
-          <div style="width:100%" class="row">
-            <div class="col-10">
-              <ol class="breadcrumb d-lg-flex d-none">
-                <li class="breadcrumb-item">
-                  <i class="bi bi-house"></i>
-                  <a [routerLink]="['/']">Home</a>
+         <div class="content-wrapper">
+    <div class="row">
+      <div class="col-xxl-12 col-sm-12 col-12">
+        <div style="min-height: 900px;" class="card">
+          <div class="card-header">
+            <div style="width:100%" class="row">
+              <div class="col-10">
+                <ol class="breadcrumb d-lg-flex d-none">
+                 <li class="breadcrumb-item">
+                    <i class="bi bi-house"></i>
+                    <a [routerLink]="['/']">Home</a>
                   </li>
                   <li class="breadcrumb-item breadcrumb-active" aria-current="page">{{ data.crumb1 }}</li>
                 </ol>
-            </div>
-            <div class="col-2">
-              <button (click)="toggleAdd()" class="m-2 btn btn-primary"><i class="bi bi-clipboard-plus"></i></button>
-                <button (click)="reload()" class="m-2 btn btn-primary"><i class="bi bi-bootstrap-reboot"></i></button>
+              </div>
+              <div class="col-2">
+                <button (click)="toggleAdd()" class="m-2 btn btn-primary"><i class="bi bi-clipboard-plus"></i></button>
+                 <button (click)="reload()" class="m-2 btn btn-primary"><i class="bi bi-bootstrap-reboot"></i></button>
                </div>
              </div>
            </div>
@@ -24,7 +24,12 @@
                <h2>{{ data.title }}</h2>
              </div>
            </div>
-           @if (adding=='Y') { <div class="card-body"><app-operator-form [id]="this.id" (close)="toggleAdd();"></app-operator-form></div> }
+                  <li class="breadcrumb-item">
+           @if (adding=='Y') {
+           <div class="card-body">
+                 <app-member-form [id]="this.id" (close)="toggleAdd();"></app-member-form>
+           </div>
+          }
            <div class="card-body">
              <div class="row mb-3">
                <div class="col-sm-4 col-12">
@@ -47,15 +52,15 @@
                        <tr>
                          <td *ngFor="let q of data.columns">{{ m[q['column']] }}</td>
                          <td>
-                           <!-- <button (click)="editItem(m)" class="btn btn-primary"> -->
-                             <i (click)="editItem(m)" class="bi bi-clipboard-plus"></i>
-                          <!-- </button> -->
+                           <button (click)="editItem(m)" class="btn btn-primary">
+                             <i class="bi bi-clipboard-plus"></i>
+                           </button>
                          </td>
                        </tr>
                        @if (m.edit=='Y') {
                        <tr>
                          <td colspan="7">
-                                 <app-operator-form [id]="m.id" (close)="closeEdit(m);"></app-operator-form>
+                                 <app-member-form [id]="m.id" (close)="closeEdit(m);"></app-member-form>
                         </td>
                        </tr>
                      }

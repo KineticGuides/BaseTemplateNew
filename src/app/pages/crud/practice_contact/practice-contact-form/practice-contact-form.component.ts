@@ -4,20 +4,20 @@ import { CommonModule } from '@angular/common'
 import { RouterLink } from '@angular/router'
 import { FormsModule } from '@angular/forms'
 @Component({
-  selector: 'app-operator-form',
+  selector: 'app-practice-contact-form',
   standalone: true,
    imports: [CommonModule, RouterLink, FormsModule],
-  templateUrl: './operator-form.component.html',
-  styleUrl: './operator-form.component.css'
+  templateUrl: './practice-contact-form.component.html',
+  styleUrl: './practice-contact-form.component.css'
 })
- export class OperatorFormComponent implements OnInit, AfterViewInit { 
+ export class PracticeContactFormComponent implements OnInit, AfterViewInit { 
   data: any;
   formData: any = {country: "", languages: ""};
   colData: any = {country: "", languages: ""};
   keys: any;
   values: any;
 
-  @Input() path: any = 'get-operator-form';
+  @Input() path: any = 'get-practice-contact-form';
   @Input() id: any = '';
   @Input() id2: any = '';
   @Input() id3: any = '';
@@ -60,7 +60,6 @@ import { FormsModule } from '@angular/forms'
   postForm(): void {
     this._dataService.postData("post-template-form", this.formData).subscribe((data: any)=> {
       this.closeIt();
-      location.reload();
       console.log(this.data)
   })
  }

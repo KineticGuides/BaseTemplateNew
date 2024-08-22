@@ -12,6 +12,8 @@ import { UserListComponent } from './pages/crud/user/user-list/user-list.compone
 import { IncomingPhoneListComponent } from './pages/crud/incoming_phone/incoming-phone-list/incoming-phone-list.component';
 import { OperatorListComponent } from './pages/crud/operator/operator-list/operator-list.component';
 import { KnownCallerListComponent } from './pages/crud/known_caller/known-caller-list/known-caller-list.component';
+import { PracticeContactListComponent } from './pages/crud/practice_contact/practice-contact-list/practice-contact-list.component';
+import { MemberListComponent } from './pages/crud/member/member-list/member-list.component';
 
 export const routes: Routes = [
     { path: '', component: TemplateHomeComponent, resolve: { data: ResolverService} },
@@ -23,7 +25,9 @@ export const routes: Routes = [
     { path: 'tables', component: TableListComponent, resolve: { data: ResolverService} },
     { path: 'users', component: UserListComponent, resolve: { data: ResolverService} },
     { path: 'columns', component: TableItemListComponent, resolve: { data: ResolverService} },
+    { path: 'contacts', component: PracticeContactListComponent, resolve: { data: ResolverService} },
     { path: 'known-caller', component: KnownCallerListComponent, resolve: { data: ResolverService} },
     { path: 'incoming-phone', component: IncomingPhoneListComponent, resolve: { data: ResolverService} },
+    { path: 'members', component: MemberListComponent, resolve: { data: ResolverService} },
     { path: 'template-list', component: TemplateListComponent, resolve: { data: ResolverService}  }
 ];

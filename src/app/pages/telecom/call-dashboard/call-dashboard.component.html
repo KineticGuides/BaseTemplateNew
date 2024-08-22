@@ -1,0 +1,87 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-2">
+                <button (click)="forwardCall()" class="btn btn-danger m-2">Forward Call</button>
+            </div>
+            <div class="col-3">
+                <select [(ngModel)]="forward_phone" class="form-control" name="contact">
+                    <option>Select A Contact</option>
+                    <option [value]="m.value" *ngFor="let m of data.contacts">
+                        {{ m.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="card border-primary">
+                    <textarea style="width:100%; height: 230px;" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card border-primary">
+                    <div class="row">
+                        <div class="col-12 p-3">
+                            <div class="card-title text-primary m-2">
+                                {{ data.member['first_name'] }} 
+                                {{ data.member['middle_initial'] }} 
+                                {{ data.member['last_name'] }} 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                {{ data.member['address_line_1']}}
+                            </div>
+                            <div class="col-6">
+                                Email: {{ data.member['email']}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                {{ data.member['address_line_2']}}
+                            </div>
+                            <div class="col-6">
+                                Home Phone: {{ data.member['home_phone_number']}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                {{ data.member['city']}}, {{ data.member['state'] }} {{ data.member['zip'] }}
+                            </div>
+                            <div class="col-6">
+                                Mobile Phone: {{ data.member['mobile_phone_number']}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                Membership Start: {{ data.member['membership_start_date']}}
+                            </div>
+                            <div class="col-6">
+                                Membership Renewal: {{ data.member['membership_start_date']}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                Emergency Contact: {{ data.member['emergency_contact_name']}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                Emergency Contact Phone: {{ data.member['emergency_contact_phone']}}
+                            </div>
+                        </div>
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

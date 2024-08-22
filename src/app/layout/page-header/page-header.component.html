@@ -4,33 +4,39 @@
       <img src="assets/images/logo.svg" class="logo-sm" alt="Bootstrap Gallery">
     </a>
 <h2 style="font-size: 30px;">Kinetic MD</h2>
-    <div class="header-actions-container">
-      <ul class="header-actions">
-        <li class="dropdown d-none d-md-block">
-
-        </li>
-        <li class="dropdown" style="max-width:300px;">
-          <a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
-            <span style="max-width:300px;" class="user-name d-none d-md-block">Operator Phone: {{ operator_phone }}</span>
-          </a>
-        </li>
-      </ul>
+    <div class="header-actions-container" style="max-width:800px!important;">
+        <ul class="header-actions" style="max-width: 800px!important;">
+          <li class="dropdown" style="max-width:800px!important;">
+            <a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true"  style="max-width:800px!important;">
+              <span class="user-name d-none d-md-block">Operator Phone: {{ operator_phone }}</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
+              <div class="header-profile-actions">
+                <a href="profile.html">Take Offline</a>
+                <a href="profile.html">Go Online</a>
+                <a href="account-settings.html">Settings</a>
+                <a href="login.html">Logout</a>
+              </div>
+            </div>
+          </li>
+        </ul>
       <!-- Header actions end -->
   </div>
 </div>
 @if (call_alert_open=='Y') {
-  <div class="row">
-    <div class="card m-3">
+  <div class="row p-1" style="width: 99%; background-color: indianred;">
+    <div class="card col-12 mt-2 mb-2 ms-2" style="width:99%;">
       <div class="card-header">
         <h1>Call Alert - {{ message.practice }}</h1>
       </div>
       <div class="card-body">
+      @if (live=='N') {
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col-1">Caller Id:</div>
+              <div class="col-2">Caller Id:</div>
               <div class="col-5">{{ message!.from }}</div>
-              <div class="col-1">Relationship:</div>
+              <div class="col-2">Relationship:</div>
               <div class="col-5">{{ message!.relationship }}</div>
             </div>
             <div class="row">
@@ -42,9 +48,13 @@
               <div class="col-5">{{ message!.dsc }}</div>
             </div>
           </div>
-        </div>
-        <button (click)="toggleCallAlert()" class="btn btn-primary">Close</button>
+        </div> 
+        <button (click)="toggleCallAlert()" class="btn btn-primary m-2">Close</button>
+      }
       </div>
+      @if (live=='Y') {
+        <app-call-dashboard [ParentSid]="ParentSid" [id]="caller"></app-call-dashboard>
+      }
     </div>
-  </div> 
+  </div>  
 }

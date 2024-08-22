@@ -12,7 +12,7 @@ export class WebSocketService {
         }
 
         connect(): void {
-          this.socket$ = webSocket('ws://sqllabs.ai:8888/websocket');
+          this.socket$ = webSocket('wss://wss.sqllabs.ai/websocket');
           console.log('connect')
         }
 
