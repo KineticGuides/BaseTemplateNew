@@ -19,6 +19,7 @@ export class PageHeaderComponent  implements OnInit, OnDestroy {
   call_alert_open: any = 'N';
   caller: any = '';
   operator_phone: any = '';
+  online: any = 'N';
   live: any = 'N';
   
   Sid: any = '';
@@ -40,37 +41,74 @@ export class PageHeaderComponent  implements OnInit, OnDestroy {
     this.subscription = this.webSocketService.onMessage().subscribe(
       (message) => {
         console.log('Received message:', message);
-        if (this.call_alert_open=='N') {
+
+        if (message['Status']=='new') {
+          // New Incoming Call
+          if (this.call_alert_open=='N') {
             this.call_alert_open='Y';
-            this.caller = message['from']
+            this.caller = message['From']
             this.message=message;
-        } else {
-          if (message['Status']==="in-progress") {
-            console.log(message['To']);
-            console.log('+1'+this.operator_phone);
-            if (message['To']=='+1'+this.operator_phone) {
-                 console.log("Me")
-                 this.ParentSid = message['ParentSid'];
-                 this.live = 'Y';
-            } else {
-                console.log("other")
-                this.call_alert_open='N';
-            }
-          } else {
-            if (message['Status']==="completed") {
-              this.call_alert_open='N'; 
-            }
+            this.ParentSid="";
           }
+        }
+
+        if (message['Status']=='in-progress') {
+          console.log(message['To']);
+          if (message['To']=='+1'+this.operator_phone) {
+               this.ParentSid = message['ParentSid'];
+               this.setBusy();
+               this.live = 'Y';
+          } else {
+              console.log("other")
+              if (this.ParentSid=='') {
+                this.call_alert_open='N';
+              }
+          }
+        }
+        if (message['Status']=='completed') {
+            if (this.ParentSid == message['ParentSid']) {
+              this.setOnline();
+            }
         }
       },
       (err) => console.error('WebSocket error:', err)
     );
   }
 
+  setOnline(): void {
+    let formData:any = {}
+    this._dataService.postData("set-online", formData).subscribe((data: any)=> {
+      this.online='Y';
+  })
+ }
+
+ setBusy(): void {
+  let formData:any = {}
+  this._dataService.postData("set-busy", formData).subscribe((data: any)=> {
+    this.online='B';
+})
+}
+
+setOffline(): void {
+  let formData:any = {}
+  this._dataService.postData("set-offline", formData).subscribe((data: any)=> {
+    this.online='N';
+})
+}
+
+  postLogout() {
+    localStorage.removeItem("uu");
+    localStorage.removeItem("uid");
+    localStorage.removeItem("role");
+    localStorage.removeItem("session");
+    location.replace("https://app.kineticmd.ai");
+  }
+
   ngAfterViewInit(): void {
     this._dataService.getUser().subscribe((data: any)=> { 
       this.data=data;
       this.operator_phone = this.data['operator_phone'];
+      this.online = this.data['online'];
       console.log(this.data)
   }) 
 
@@ -84,7 +122,6 @@ export class PageHeaderComponent  implements OnInit, OnDestroy {
     }) 
   }
   
-
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.webSocketService.close();

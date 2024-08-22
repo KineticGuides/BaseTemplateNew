@@ -7,7 +7,7 @@
             <div class="col-3">
                 <select [(ngModel)]="forward_phone" class="form-control" name="contact">
                     <option>Select A Contact</option>
-                    <option [value]="m.value" *ngFor="let m of data.contacts">
+                    <option [value]="m.value" *ngFor="let m of contacts">
                         {{ m.name }}
                     </option>
                 </select>

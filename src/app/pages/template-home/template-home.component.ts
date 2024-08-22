@@ -5,12 +5,13 @@ import { Subject, takeUntil } from 'rxjs';
 import { FormsModule,  FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../data.service'; 
+import { CalendarModule } from '../../calendar/calendar.module';
 
 
 @Component({
   selector: 'app-template-home',
   standalone: true,
-  imports: [],
+  imports: [CalendarModule],
   templateUrl: './template-home.component.html',
   styleUrl: './template-home.component.css'
 })

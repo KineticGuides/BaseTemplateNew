@@ -6,16 +6,44 @@
 <h2 style="font-size: 30px;">Kinetic MD</h2>
     <div class="header-actions-container" style="max-width:800px!important;">
         <ul class="header-actions" style="max-width: 800px!important;">
+          <li class="dropdown d-none d-md-block">
+            @if(online=='Y') {
+              <a href="#" id="countries" data-toggle="dropdown" aria-haspopup="true">
+                <img src="assets/images/flags/1x1/online.png" class="flag-img" alt="Admin Panels">
+              </a>              
+            }
+            @if(online=='B') {
+              <a href="#" id="countries" data-toggle="dropdown" aria-haspopup="true">
+                <img src="assets/images/flags/1x1/busy.png" class="flag-img" alt="Admin Panels">
+              </a>              
+            }
+            @if(online=='N') {
+              <a href="#" id="countries" data-toggle="dropdown" aria-haspopup="true">
+                <img src="assets/images/flags/1x1/offline.png" class="flag-img" alt="Admin Panels">
+              </a>              
+            }
+            <div class="dropdown-menu dropdown-menu-end mini" aria-labelledby="countries">
+              <div class="country-container">
+                <a (click)="setOnline()">
+                  <img src="assets/images/flags/1x1/online.png">
+                </a>
+                <a (click)="setBusy()">
+                  <img src="assets/images/flags/1x1/busy.png">
+                </a>
+                <a (click)="setOffline()">
+                  <img src="assets/images/flags/1x1/offline.png">
+                </a>
+              </div>
+            </div>
+          </li>
           <li class="dropdown" style="max-width:800px!important;">
             <a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true"  style="max-width:800px!important;">
               <span class="user-name d-none d-md-block">Operator Phone: {{ operator_phone }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
               <div class="header-profile-actions">
-                <a href="profile.html">Take Offline</a>
-                <a href="profile.html">Go Online</a>
-                <a href="account-settings.html">Settings</a>
-                <a href="login.html">Logout</a>
+                <a href="#">Settings</a>
+                <a (click)="postLogout();">Logout</a>
               </div>
             </div>
           </li>
@@ -54,6 +82,7 @@
       </div>
       @if (live=='Y') {
         <app-call-dashboard [ParentSid]="ParentSid" [id]="caller"></app-call-dashboard>
+        <button (click)="toggleCallAlert()" class="btn btn-primary m-2">Close</button>
       }
     </div>
   </div>  

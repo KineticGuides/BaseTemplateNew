@@ -61,6 +61,7 @@ import { FormsModule } from '@angular/forms'
     this._dataService.postData("post-user-form", this.formData).subscribe((data: any)=> {
       this.closeIt();
       console.log(this.data)
+      location.reload();
   })
  }
 
@@ -69,6 +70,7 @@ import { FormsModule } from '@angular/forms'
     this._dataService.postData("denlete-template-form", this.formData).subscribe((data: any)=> {
       this.closeIt();
       console.log(this.data)
+      location.reload();
   })
   }
 }

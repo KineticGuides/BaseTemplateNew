@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms'
 })
 export class CallDashboardComponent  implements OnInit, AfterViewInit { 
   data: any;
+  contacts: any;
   forward_phone: any = '';
   formData: any = {country: "", languages: ""};
   colData: any = {country: "", languages: ""};
@@ -38,11 +39,12 @@ export class CallDashboardComponent  implements OnInit, AfterViewInit {
 
     this._dataService.getData(this.path, this.id, this.id2, this.id3).subscribe((data: any)=> {
       this.data=data;
-      this.formData=data['formData'];
-      this.colData=data['colData'];
-      this.keys = Object.keys(this.formData);
-      this.values = Object.entries(this.formData);
-      console.log(this.data['formData'])
+      if (this.data['contacts']!==undefined) this.contacts = this.data.contacts;
+      //this.formData=data['formData'];
+      //this.colData=data['colData'];
+      //this.keys = Object.keys(this.formData);
+      //this.values = Object.entries(this.formData);
+      //console.log(this.data['formData'])
   })
 
   }
