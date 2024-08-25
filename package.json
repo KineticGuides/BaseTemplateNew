@@ -19,7 +19,11 @@
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
     "@daypilot/daypilot-lite-angular": "^3.23.0",
+    "@ng-bootstrap/ng-bootstrap": "^17.0.0",
+    "ng-bootstrap": "^1.6.3",
+    "ngx-bootstrap": "^18.0.2",
     "ngx-pagination": "^6.0.3",
+    "ngx-typeahead": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

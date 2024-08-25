@@ -1,6 +1,7 @@
-import {Component, ViewChild, AfterViewInit} from "@angular/core";
+import {Component, ViewChild, AfterViewInit, Input, OnChanges, SimpleChanges, Output, EventEmitter} from "@angular/core";
 import {DayPilot, DayPilotCalendarComponent} from "@daypilot/daypilot-lite-angular";
-import {DataService} from "./data.service";
+//import {DataService} from "./data.service";
+import { DataService } from "../data.service";
 import {forkJoin} from "rxjs";
 
 @Component({
@@ -8,57 +9,50 @@ import {forkJoin} from "rxjs";
   template: `<daypilot-calendar [config]="config" #calendar></daypilot-calendar>`,
   styles: [``]
 })
-export class CalendarComponent implements AfterViewInit {
+export class CalendarComponent implements AfterViewInit, OnChanges {
 
+  @Output() schedule: EventEmitter<any> = new EventEmitter<any>();
+  sched: any = {}
   @ViewChild("calendar")
   calendar!: DayPilotCalendarComponent;
-
+  @Input() currentDate: any = "2024-08-28"; 
+  
   config: DayPilot.CalendarConfig = {
     viewType: "Resources",
     headerHeight: 100,
-    startDate: "2025-09-01",
+    startDate: this.currentDate,
     contextMenu: new DayPilot.Menu({
       items: [
         {
           text: "Edit...",
           onClick: async args => {
             const data = args.source.data;
-            const modal = await DayPilot.Modal.prompt("Edit event text:", data.text);
-
-            const calendar = this.calendar.control;
-            if (modal.canceled) {
-              return;
-            }
-
-            data.text = modal.result;
-            calendar.events.update(data);
+            this.sched = { id: data.id, currentDate: this.currentDate, start: data.start, end: data.end, resource: data.resource }
+            this.schedule.emit(this.sched)
+            console.log(data);
           }
         },
-        {
-          text: "Delete",
-          onClick: args => {
-            this.calendar.control.events.remove(args.source);
-          }
-        }
+
       ]
     }),
     onTimeRangeSelected: async args => {
-      const modal = await DayPilot.Modal.prompt("Create a new appointment:", "Event 1");
-      
-      const calendar = this.calendar.control;
-      calendar.clearSelection();
-      if (modal.canceled) {
-        return;
-      }
-
-      calendar.events.add({
-        start: args.start,
-        end: args.end,
-        id: DayPilot.guid(),
-        text: modal.result,
-        resource: args.resource
-      });
-
+//      const modal = await DayPilot.Modal.prompt("Create a new appointment:", "Event 1");
+//      console.log(modal)
+//      const calendar = this.calendar.control;
+//      calendar.clearSelection();
+//      if (modal.canceled) {
+//        return;
+//      }
+this.sched = { id: "", currentDate: this.currentDate, start: args.start, end: args.end, resource: args.resource }
+this.schedule.emit(this.sched)
+//      calendar.events.add({
+ //       start: args.start,
+ //       end: args.end,
+ //       id: DayPilot.guid(),
+ //       text: modal.result,
+ //       resource: args.resource
+ //     });
+ //     console.log("I did something")
     },
     onBeforeHeaderRender: args => {
       const data = args.column.data;
@@ -94,7 +88,12 @@ export class CalendarComponent implements AfterViewInit {
     }
   };
 
-  constructor(private ds: DataService) {
+  constructor(private _dataService: DataService) {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.config.startDate=this.currentDate;
+    this.ngAfterViewInit();
   }
 
   ngAfterViewInit(): void {
@@ -102,16 +101,18 @@ export class CalendarComponent implements AfterViewInit {
     const from = new DayPilot.Date(this.config.startDate);
     const to = from.addDays(1);
 
-    forkJoin([
-      this.ds.getResources(),
-      this.ds.getEvents(from, to)
-    ]).subscribe(data => {
-        const options = {
-          columns: data[0],
-          events: data[1]
-        };
-        this.calendar.control.update(options);
-    });
+    this._dataService.getData("get-resource-calendar","1",this.currentDate,"").subscribe((data: any)=> { 
+      const options = {
+        columns: data['resources'],
+        events: data['events']
+      };
+      this.calendar.control.update(options);
+
+
+  }) 
+
+  console.log(from);
+  console.log(to);
 
   }
 

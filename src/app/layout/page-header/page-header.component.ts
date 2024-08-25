@@ -3,11 +3,13 @@ import { Subscription } from 'rxjs';
 import { WebSocketService } from '../../web-sockets.service';
 import { DataService } from '../../data.service';
 import { CallDashboardComponent } from '../../pages/telecom/call-dashboard/call-dashboard.component';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-page-header',
   standalone: true,
-  imports: [CallDashboardComponent],
+  imports: [CallDashboardComponent, FormsModule],
   templateUrl: './page-header.component.html',
   styleUrl: './page-header.component.css'
 })
@@ -35,8 +37,12 @@ export class PageHeaderComponent  implements OnInit, OnDestroy {
     }
   }
   
-  constructor(private webSocketService: WebSocketService, private _dataService: DataService) {  }
-  
+  constructor(
+    private webSocketService: WebSocketService,
+    private _dataService: DataService,
+    private _router: Router
+) { }
+
   ngOnInit(): void {
     this.subscription = this.webSocketService.onMessage().subscribe(
       (message) => {
@@ -109,6 +115,16 @@ setOffline(): void {
       this.data=data;
       this.operator_phone = this.data['operator_phone'];
       this.online = this.data['online'];
+      console.log(this.data)
+  }) 
+
+  }
+
+  postSkipper(): void {
+    let formData: any = { "message": this.message }
+    this._dataService.postData("hey-skipper", formData).subscribe((data: any)=> { 
+      console.log(data.location)
+      this._router.navigate([data.location]);
       console.log(this.data)
   }) 
 

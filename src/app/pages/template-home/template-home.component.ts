@@ -6,12 +6,13 @@ import { FormsModule,  FormGroup, FormControl, Validators } from '@angular/forms
 import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../data.service'; 
 import { CalendarModule } from '../../calendar/calendar.module';
+import { ProviderCalendarModule } from '../../provider-calendar/provider-calendar.module';
 
 
 @Component({
   selector: 'app-template-home',
   standalone: true,
-  imports: [CalendarModule],
+  imports: [CalendarModule, ProviderCalendarModule],
   templateUrl: './template-home.component.html',
   styleUrl: './template-home.component.css'
 })

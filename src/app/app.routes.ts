@@ -14,9 +14,17 @@ import { OperatorListComponent } from './pages/crud/operator/operator-list/opera
 import { KnownCallerListComponent } from './pages/crud/known_caller/known-caller-list/known-caller-list.component';
 import { PracticeContactListComponent } from './pages/crud/practice_contact/practice-contact-list/practice-contact-list.component';
 import { MemberListComponent } from './pages/crud/member/member-list/member-list.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { UserActivityListComponent } from './pages/crud/user_activity/user-activity-list/user-activity-list.component';
+import { UserMessageListComponent } from './pages/crud/user_message/user-message-list/user-message-list.component';
+import { ProviderListComponent } from './pages/crud/provider/provider-list/provider-list.component';
+import { ResourceListComponent } from './pages/crud/resource/resource-list/resource-list.component';
+import { ResourceDayCalendarComponent } from './pages/resource-day-calendar/resource-day-calendar.component';
+import { SingleResourceCalendarComponent } from './pages/single-resource-calendar/single-resource-calendar.component';
+import { ApptListComponent } from './pages/crud/appt/appt-list/appt-list.component';
 
 export const routes: Routes = [
-    { path: '', component: TemplateHomeComponent, resolve: { data: ResolverService} },
+    { path: '', component: HomePageComponent, resolve: { data: ResolverService} },
     { path: 'practices', component: PracticeListComponent, resolve: { data: ResolverService}  },
     { path: 'menus', component: MenuListComponent, resolve: { data: ResolverService} },
     { path: 'menu-items', component: MenuItemListComponent, resolve: { data: ResolverService} },
@@ -25,9 +33,17 @@ export const routes: Routes = [
     { path: 'tables', component: TableListComponent, resolve: { data: ResolverService} },
     { path: 'users', component: UserListComponent, resolve: { data: ResolverService} },
     { path: 'columns', component: TableItemListComponent, resolve: { data: ResolverService} },
+    { path: 'user-activities', component: UserActivityListComponent, resolve: { data: ResolverService} },
     { path: 'contacts', component: PracticeContactListComponent, resolve: { data: ResolverService} },
+    { path: 'user-messages', component: UserMessageListComponent, resolve: { data: ResolverService} },
     { path: 'known-caller', component: KnownCallerListComponent, resolve: { data: ResolverService} },
+    { path: 'providers', component: ProviderListComponent, resolve: { data: ResolverService} },
     { path: 'incoming-phone', component: IncomingPhoneListComponent, resolve: { data: ResolverService} },
+    { path: 'calendar', component: TemplateHomeComponent, resolve: { data: ResolverService} },
+    { path: 'resource-calendar', component: ResourceDayCalendarComponent, resolve: { data: ResolverService} },
+    { path: 'day-calendar', component: SingleResourceCalendarComponent, resolve: { data: ResolverService} },
+    { path: 'appts', component: ApptListComponent, resolve: { data: ResolverService} },
     { path: 'members', component: MemberListComponent, resolve: { data: ResolverService} },
+    { path: 'resources', component: ResourceListComponent, resolve: { data: ResolverService} },
     { path: 'template-list', component: TemplateListComponent, resolve: { data: ResolverService}  }
 ];

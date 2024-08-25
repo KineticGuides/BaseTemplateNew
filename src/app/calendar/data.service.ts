@@ -15,7 +15,8 @@ export class DataService {
       end: "2025-09-01T15:00:00",
       text: "Event 1",
       resource: "R1",
-      barColor: "#f1c232"
+      barColor: "#f1c232",
+      backColor: "#f1c232",
     },
     {
       id: 2,
@@ -61,10 +62,10 @@ export class DataService {
   ];
 
   resources: CalendarColumnData[] = [
-      {name: "Resource 1", id: "R1", tags: { image: "/avatars/pat-blue.jpg" } },
-      {name: "Resource 2", id: "R2", tags: { image: "/avatars/pat-orange.jpg" } },
-      {name: "Resource 3", id: "R3", tags: { image: "/avatars/pat-red.jpg" } },
-      {name: "Resource 4", id: "R4", tags: { image: "/avatars/pat-yellow.jpg" } },
+      {name: "Resource 1", id: "R1", tags: { image: "assets/images/user2.png" } },
+      {name: "Resource 2", id: "R2", tags: { image: "assets/images/user3.png" } },
+      {name: "Resource 3", id: "R3", tags: { image: "assets/images/user4.png" } },
+      {name: "Resource 4", id: "R4", tags: { image: "assets/images/user5.png" } },
   ];
 
   constructor(private http: HttpClient) {

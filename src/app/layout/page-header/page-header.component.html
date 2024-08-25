@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="page-header" style="padding-bottom:0px">
     <div class="toggle-sidebar" id="toggle-sidebar"><i class="bi bi-list"></i></div>
     <a href="index.html" class="d-lg-none d-md-block">
       <img src="assets/images/logo.svg" class="logo-sm" alt="Bootstrap Gallery">
@@ -51,6 +51,11 @@
       <!-- Header actions end -->
   </div>
 </div>
+<!--
+<div class="row p-1">
+  <input type="text" [(ngModel)]="message" (keydown.enter)="postSkipper()" class="form-control">
+</div>
+-->
 @if (call_alert_open=='Y') {
   <div class="row p-1" style="width: 99%; background-color: indianred;">
     <div class="card col-12 mt-2 mb-2 ms-2" style="width:99%;">
