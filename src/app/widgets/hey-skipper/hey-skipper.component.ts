@@ -5,6 +5,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { FormsModule,  FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../data.service'; 
+import { StorageService } from '../../localstorage.service';
 
 @Component({
   selector: 'app-hey-skipper',
@@ -27,7 +28,8 @@ export class HeySkipperComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _dataService: DataService,
     private _router: Router,
-    public http: HttpClient  // used by upload
+    public http: HttpClient,
+    private storageService: StorageService
 ) { }
 
   ngOnInit(): void
@@ -42,10 +44,17 @@ export class HeySkipperComponent implements OnInit {
   
     let formData: any = { "message": this.message }
 
-    this._dataService.postData("hey-skipper", formData).subscribe((data: any)=> { 
-      console.log(data.location)
-      this._router.navigate([data.location]);
-      console.log(this.data)
+    this._dataService.postSkipper("hey-skipper", formData).subscribe((data: any)=> { 
+//      console.log(data.location)
+//      this._router.navigate([data.location]);
+//      console.log(this.data)
+        if (data.action=='set-practice') this.storageService.setItem('current_practice', data.value)
+        if (data.action=='set-date') {
+            this.storageService.setItem('current_date', data.value.year + '-' + data.value.month + '-' + data.value.year);
+            this.storageService.setItem('current_year', data.value.year);
+            this.storageService.setItem('current_month', data.value.month);
+            this.storageService.setItem('current_day', data.value.day);
+        }
   }) 
 
   }

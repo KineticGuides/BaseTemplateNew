@@ -2,6 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { DataService } from '../../data.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { StorageService } from '../../localstorage.service';
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -12,7 +13,7 @@ import { RouterLink } from '@angular/router';
 })
 export class SidebarMenuComponent implements AfterViewInit {
   data: any;
-  constructor(private _dataService: DataService) {
+  constructor(private _dataService: DataService, private storageService: StorageService = new StorageService) {
 
   }
 

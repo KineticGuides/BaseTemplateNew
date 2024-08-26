@@ -17,6 +17,10 @@ export class CalendarComponent implements AfterViewInit, OnChanges {
   calendar!: DayPilotCalendarComponent;
   @Input() currentDate: any = "2024-08-28"; 
   
+  doClick(){
+    alert('hello');
+  }
+
   config: DayPilot.CalendarConfig = {
     viewType: "Resources",
     headerHeight: 100,
@@ -36,23 +40,20 @@ export class CalendarComponent implements AfterViewInit, OnChanges {
       ]
     }),
     onTimeRangeSelected: async args => {
-//      const modal = await DayPilot.Modal.prompt("Create a new appointment:", "Event 1");
-//      console.log(modal)
-//      const calendar = this.calendar.control;
-//      calendar.clearSelection();
-//      if (modal.canceled) {
-//        return;
-//      }
-this.sched = { id: "", currentDate: this.currentDate, start: args.start, end: args.end, resource: args.resource }
-this.schedule.emit(this.sched)
-//      calendar.events.add({
- //       start: args.start,
- //       end: args.end,
- //       id: DayPilot.guid(),
- //       text: modal.result,
- //       resource: args.resource
- //     });
- //     console.log("I did something")
+        this.sched = { id: "", currentDate: this.currentDate, start: args.start, end: args.end, resource: args.resource }
+        this.schedule.emit(this.sched)
+    },
+    onEventClicked: args => {
+        // Event is clicked
+        console.log(args)
+    },
+    onEventMoved: args => {
+      // Event is moved
+      console.log(args)
+    },
+    onEventResize: args => {
+      // Event is resized
+      console.log(args)
     },
     onBeforeHeaderRender: args => {
       const data = args.column.data;

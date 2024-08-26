@@ -5,6 +5,7 @@ import { DataService } from '../../data.service';
 import { CallDashboardComponent } from '../../pages/telecom/call-dashboard/call-dashboard.component';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { StorageService } from '../../localstorage.service';
 
 @Component({
   selector: 'app-page-header',
@@ -40,7 +41,8 @@ export class PageHeaderComponent  implements OnInit, OnDestroy {
   constructor(
     private webSocketService: WebSocketService,
     private _dataService: DataService,
-    private _router: Router
+    private _router: Router,
+    private storageService: StorageService = new StorageService
 ) { }
 
   ngOnInit(): void {
@@ -122,10 +124,13 @@ setOffline(): void {
 
   postSkipper(): void {
     let formData: any = { "message": this.message }
-    this._dataService.postData("hey-skipper", formData).subscribe((data: any)=> { 
-      console.log(data.location)
-      this._router.navigate([data.location]);
-      console.log(this.data)
+    this._dataService.postSkipper("hey-skipper", formData).subscribe((data: any)=> { 
+      if (data.action=='set-practice') {
+        this.storageService.setItem('practice_id', data.value);
+      }
+//      console.log(data.location)
+//      this._router.navigate([data.location]);
+//      console.log(this.data)
   }) 
 
   }
