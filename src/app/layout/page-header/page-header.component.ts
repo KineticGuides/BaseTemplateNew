@@ -117,7 +117,6 @@ setOffline(): void {
     this._dataService.getUser().subscribe((data: any)=> { 
       this.data=data;
       this.operator_phone = this.data['operator_phone'];
-      this.operator_phone = "Joe";
       this.online = this.data['online'];
       console.log(this.data)
   }) 

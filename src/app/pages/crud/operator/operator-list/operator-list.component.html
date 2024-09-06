@@ -47,9 +47,7 @@
                        <tr>
                          <td *ngFor="let q of data.columns">{{ m[q['column']] }}</td>
                          <td>
-                           <!-- <button (click)="editItem(m)" class="btn btn-primary"> -->
                              <i (click)="editItem(m)" class="bi bi-clipboard-plus"></i>
-                          <!-- </button> -->
                          </td>
                        </tr>
                        @if (m.edit=='Y') {

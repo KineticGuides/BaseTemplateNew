@@ -31,6 +31,7 @@
   <script src="assets/vendor/overlay-scroll/custom-scrollbar.js"></script>
   <script src="https://sdk.twilio.com/js/client/v1.13/twilio.min.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
   <script>
     let device;
   
@@ -46,7 +47,6 @@
       }
     }
   
-    // Function to fetch the token from your PHP server
     async function fetchToken(userId) {
       const response = await fetch('https://sqllabs.ai/api/cat.php',{
                   method: 'post',
@@ -59,24 +59,33 @@
     return data.token;
   }
 
-  // Initialize Twilio Client with the token and media permissions
+  async function postOnlineStatus(userId) {
+      const response = await fetch('https://sqllabs.ai/api/post_online_status.php',{
+                  method: 'post',
+                  headers:new Headers({
+                      'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                  }),
+                  body: 'id=' + userId
+            });
+      const data = await response.json();
+      console.log(data);
+  }
+
   async function initializeTwilioClient() {
     try {
       const mediaStream = await getMediaPermissions(); // Request microphone access
-      //userId = document.getElementById('userId').innerHTML;
-      userId="Joe";
+      userId = document.getElementById('userId').innerHTML;
       const token = await fetchToken(userId);
-  console.log(token)
-      // Create a new Twilio Device instance
+      console.log(token)
       device = new Twilio.Device(token, {
         codecPreferences: ['opus', 'pcmu'],
         debug: true,
-        // Pass the mediaStream (microphone access) to Twilio
         audioHelper: { inputStream: mediaStream }
       });
 
       device.on('ready', (device) => {
         console.log('Twilio Device is ready to make/receive calls');
+        postOnlineStatus(userId)
       });
 
       device.on('incoming', (connection) => {
