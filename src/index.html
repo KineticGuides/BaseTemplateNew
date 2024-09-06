@@ -48,7 +48,7 @@
   
     // Function to fetch the token from your PHP server
     async function fetchToken(userId) {
-      const response = await fetch('/api/cat.php',{
+      const response = await fetch('https://sqllabs.ai/api/cat.php',{
                   method: 'post',
                   headers:new Headers({
                       'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -61,11 +61,12 @@
 
   // Initialize Twilio Client with the token and media permissions
   async function initializeTwilioClient() {
-    alert("Go!")
     try {
       const mediaStream = await getMediaPermissions(); // Request microphone access
-      userId = document.getElementById('userId').innerHTML;
+      //userId = document.getElementById('userId').innerHTML;
+      userId="Joe";
       const token = await fetchToken(userId);
+  console.log(token)
       // Create a new Twilio Device instance
       device = new Twilio.Device(token, {
         codecPreferences: ['opus', 'pcmu'],
