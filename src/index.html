@@ -29,6 +29,140 @@
   <script src="assets/js/moment.js"></script>
   <script src="assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
   <script src="assets/vendor/overlay-scroll/custom-scrollbar.js"></script>
+  <script src="https://sdk.twilio.com/js/client/v1.13/twilio.min.js"></script>
   <script src="assets/js/main.js"></script>
+  <script>
+    let device;
+  
+    // Request permission to access the microphone
+    async function getMediaPermissions() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        console.log('Microphone access granted.');
+        return stream;
+      } catch (err) {
+        console.error('Microphone access denied: ', err);
+        throw new Error('Microphone permission is required.');
+      }
+    }
+  
+    // Function to fetch the token from your PHP server
+    async function fetchToken(userId) {
+      const response = await fetch('/api/cat.php',{
+                  method: 'post',
+                  headers:new Headers({
+                      'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                  }),
+                  body: 'login=' + userId
+            });
+    const data = await response.json();
+    return data.token;
+  }
+
+  // Initialize Twilio Client with the token and media permissions
+  async function initializeTwilioClient() {
+    alert("Go!")
+    try {
+      const mediaStream = await getMediaPermissions(); // Request microphone access
+      userId = document.getElementById('userId').innerHTML;
+      const token = await fetchToken(userId);
+      // Create a new Twilio Device instance
+      device = new Twilio.Device(token, {
+        codecPreferences: ['opus', 'pcmu'],
+        debug: true,
+        // Pass the mediaStream (microphone access) to Twilio
+        audioHelper: { inputStream: mediaStream }
+      });
+
+      device.on('ready', (device) => {
+        console.log('Twilio Device is ready to make/receive calls');
+      });
+
+      device.on('incoming', (connection) => {
+        console.log('Incoming call from:', connection.parameters.From);
+        incomingConnection = connection;
+        showIncomingCallUI();
+        
+                connection.on('disconnect', () => {
+                console.log('Call disconnected before answering');
+                hideIncomingCallUI(); // Hide the UI when the call is disconnected
+                });
+
+    });
+
+
+      device.on('cancel', () => {
+        console.log('Call disconnected before answering');
+        hideIncomingCallUI(); // Hide the UI when the call is disconnected
+      });
+      device.on('error', (error) => {
+        console.error('Twilio Device error: ', error);
+      });
+    } catch (error) {
+      console.error('Error initializing Twilio Client:', error);
+    }
+  }
+
+  // Initialize Twilio when the page loads
+  window.onload = function() {
+    //initializeTwilioClient();
+  };
+
+  function login() {
+     initializeTwilioClient();
+     userId = document.getElementById('userId').innerHTML;
+     //document.getElementById("loginstatus").innerHTML = "Logged in as : " + userId;
+  }
+
+  function logout() {
+        if (device) {
+        device.destroy();  // This will stop incoming calls and disconnect everything
+        console.log('Twilio Device destroyed, no longer listening for calls');
+        } else {
+        console.error('Twilio device is not initialized.');
+        }
+        document.getElementById("loginstatus").innerHTML = "Logged out";;
+  }
+
+  function showIncomingCallUI() {
+    document.getElementById('incoming-call').style.display = 'block'; // Show answer/reject buttons
+  }
+
+  // Hide incoming call UI
+  function hideIncomingCallUI() {
+    document.getElementById('incoming-call').style.display = 'none';
+  }
+
+  function answerCall() {
+    if (incomingConnection) {
+      incomingConnection.accept();
+      console.log('Call answered');
+      hideIncomingCallUI();
+    }
+  }
+
+ function rejectCall() {
+    if (incomingConnection) {
+      incomingConnection.reject();
+      console.log('Call rejected');
+      hideIncomingCallUI();
+    }
+  }
+
+
+  // Function to make an outgoing call
+  function makeCall() {
+    phone = document.getElementById('outphone').value;
+    const params = { To: phone }; // Specify the recipient
+    device.connect(params);
+  }
+
+  // Function to hang up the call
+  function hangUpCall() {
+    if (device) {
+      device.disconnectAll();
+    }
+  }
+</script>
 </body>
 </html>

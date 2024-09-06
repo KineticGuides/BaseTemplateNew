@@ -86,9 +86,10 @@ export class PageHeaderComponent  implements OnInit, OnDestroy {
   setOnline(): void {
     let formData:any = {}
     this._dataService.postData("set-online", formData).subscribe((data: any)=> {
-      this.online='Y';
+    this.online='Y';
   })
- }
+
+}
 
  setBusy(): void {
   let formData:any = {}
@@ -116,6 +117,7 @@ setOffline(): void {
     this._dataService.getUser().subscribe((data: any)=> { 
       this.data=data;
       this.operator_phone = this.data['operator_phone'];
+      this.operator_phone = "Joe";
       this.online = this.data['online'];
       console.log(this.data)
   }) 
