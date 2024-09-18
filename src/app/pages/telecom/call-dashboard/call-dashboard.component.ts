@@ -3,11 +3,15 @@ import { DataService } from '../../../data.service';
 import { CommonModule } from '@angular/common'
 import { RouterLink } from '@angular/router'
 import { FormsModule } from '@angular/forms'
+import { ProviderCalendarComponent } from '../../../provider-calendar/provider-calendar.component';
+import { ProviderCalendarModule } from '../../../provider-calendar/provider-calendar.module';
+import { SingleResourceCalendarComponent } from '../../single-resource-calendar/single-resource-calendar.component';
+import { ResourceDayCalendarComponent } from "../../resource-day-calendar/resource-day-calendar.component";
 
 @Component({
   selector: 'app-call-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, ProviderCalendarModule, SingleResourceCalendarComponent],
   templateUrl: './call-dashboard.component.html',
   styleUrl: './call-dashboard.component.css'
 })

@@ -1,17 +1,19 @@
 <div class="card">
     <div class="card-body">
-        <div class="row">
-            <div class="col-2">
-                <button (click)="forwardCall()" class="btn btn-danger m-2">Forward Call</button>
+        <div class="row" style="background-color: #eeeeee;">
+            <div class="col-12">
+                <button (click)="forwardCall()" class="btn btn-primary m-2">Call Notes</button>
+                <button (click)="forwardCall()" class="btn btn-secondary m-2">New Contact</button>
+                <button (click)="forwardCall()" class="btn btn-secondary m-2">Schedule</button>
+                <button (click)="forwardCall()" class="btn btn-danger m-2">Transfer Call</button>
             </div>
-            <div class="col-3">
+<!--            <div class="col-3">
                 <select [(ngModel)]="forward_phone" class="form-control" name="contact">
                     <option>Select A Contact</option>
                     <option [value]="m.value" *ngFor="let m of contacts">
                         {{ m.name }}
                     </option>
-                </select>
-            </div>
+                </select> -->
         </div>
         <div class="row">
             <div class="col-6">
@@ -109,5 +111,6 @@
                         </div>
                     </div>
                 </div>
+                <app-single-resource-calendar></app-single-resource-calendar>
             </div>
         </div>

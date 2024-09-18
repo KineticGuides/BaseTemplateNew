@@ -24,7 +24,7 @@ export class PageHeaderComponent  implements OnInit, OnDestroy {
   operator_phone: any = '';
   online: any = 'N';
   live: any = 'N';
-  
+  openedWindow: Window | null = null;  
   Sid: any = '';
   ParentSid: any = '';
 
@@ -35,9 +35,30 @@ export class PageHeaderComponent  implements OnInit, OnDestroy {
       this.call_alert_open='Y';
     } else {
       this.call_alert_open='N';
+      localStorage.setItem('rejectCall','Y')
     }
   }
   
+  answerCall() {
+    localStorage.setItem('answerCall','Y');
+  }
+
+
+  doConnect() {
+
+    const url = "https://app.kinetic.md/tel.php?userId="+this.operator_phone;  
+
+    if (this.openedWindow && !this.openedWindow.closed) {
+        this.openedWindow.focus(); 
+    } else {
+       this.openedWindow = window.open(url, '_blank');
+    }   
+  }
+
+  doDisconnect() {
+
+  }
+
   constructor(
     private webSocketService: WebSocketService,
     private _dataService: DataService,
@@ -62,7 +83,9 @@ export class PageHeaderComponent  implements OnInit, OnDestroy {
 
         if (message['Status']=='in-progress') {
           console.log(message['To']);
-          if (message['To']=='+1'+this.operator_phone) {
+          let str = message['To'];
+          let result = str.replace('client:', '');
+          if (result=='+1'+this.operator_phone||result==this.operator_phone) {
                this.ParentSid = message['ParentSid'];
                this.setBusy();
                this.live = 'Y';
@@ -81,7 +104,17 @@ export class PageHeaderComponent  implements OnInit, OnDestroy {
       },
       (err) => console.error('WebSocket error:', err)
     );
+
+    setInterval(() => {
+      this.online = localStorage.getItem('online');
+      console.log(this.online)
+    }, 500); 
+    
   }
+  
+  doQueue() {
+    localStorage.setItem('connect-queue','Y')   
+  } 
 
   setOnline(): void {
     let formData:any = {}
@@ -98,12 +131,12 @@ export class PageHeaderComponent  implements OnInit, OnDestroy {
 })
 }
 
-setOffline(): void {
-  let formData:any = {}
-  this._dataService.postData("set-offline", formData).subscribe((data: any)=> {
-    this.online='N';
-})
-}
+  setOffline(): void {
+    let formData:any = {}
+    this._dataService.postData("set-offline", formData).subscribe((data: any)=> {
+      this.online='N';
+  })
+  }
 
   postLogout() {
     localStorage.removeItem("uu");

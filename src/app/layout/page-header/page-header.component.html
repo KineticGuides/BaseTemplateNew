@@ -43,21 +43,20 @@
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
               <div class="header-profile-actions">
                 <a href="#">Settings</a>
-                <a href="#" onClick="initializeTwilioClient()">Connect</a>
-                <a href="#" onClick="logout()">Disconnect</a>
+                <a href="#" (click)="doConnect()">Connect</a>
+                <a href="#" (click)="doDisconnect()">Disconnect</a>
                 <a href="#" (click)="postLogout();">Logout</a>
               </div>
             </div>
           <li>
-            <button class="ms-2 btn btn-primary"><i style="border: 0px; border-bottom-width: 0px;" class="bi bi-telephone"></i></button>
-            <!-- <input type="text" id="userId"> 
+            <button class="ms-2 btn btn-primary"><i (click)="doQueue()" style="border: 0px; border-bottom-width: 0px;" class="bi bi-telephone"></i></button>
+            <!-- <input type="text" id="userId">
             <button onClick="initializeTwilioClient()">Login</button><button onClick="logout()">Loging</button> 
             <button onClick="makeCall()" id="call-button">Make Call</button>
-            <button onClick="hangUpCall()" id="hangup-button">Hang up</button>          
+            <button onClick="hangUpCall()" id="hangup-button">Hang up</button>
             <div id="incoming-call" style="display:none;">
-          
-          <button onclick="rejectCall()">Reject</button> 
-          </div> -->
+            <button onclick="rejectCall()">Reject</button> 
+            </div> -->
           </li>
         </ul>
       <!-- Header actions end -->
@@ -72,7 +71,7 @@
   <div class="row p-1" style="width: 99%; background-color: indianred;">
     <div class="card col-12 mt-2 mb-2 ms-2" style="width:99%;">
       <div class="card-header">
-        <h1>Call Alert - {{ message.practice }}</h1>
+        <h1 style="font-size:24px;">Call Alert - {{ message.practice }}</h1>
       </div>
       <div class="card-body">
       @if (live=='N') {
@@ -85,16 +84,22 @@
               <div class="col-5">{{ message!.relationship }}</div>
             </div>
             <div class="row">
-              <div class="col-1">Caller:</div>
+              <div class="row">
+                <div class="col-2">First:</div>
+                <div class="col-5">{{ message!.first_name }}</div>
+                <div class="col-2">Last:</div>
+                <div class="col-5">{{ message!.last_name }}</div>
+              </div>
+              <div class="col-2">Caller:</div>
               <div class="col-5">{{ message!.member_name }}</div>
             </div>
             <div class="row">
-              <div class="col-1">Notes:</div>
+              <div class="col-2">Notes:</div>
               <div class="col-5">{{ message!.dsc }}</div>
             </div>
           </div>
         </div> 
-        <button class="btn btn-danger" onclick="answerCall()">Answer</button>
+        <button class="btn btn-danger" (click)="answerCall()">Answer</button>
         <button (click)="toggleCallAlert()" class="btn btn-primary m-2">Close</button>
       }
       </div>
