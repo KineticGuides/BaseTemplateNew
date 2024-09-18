@@ -22,9 +22,13 @@ import { ResourceListComponent } from './pages/crud/resource/resource-list/resou
 import { ResourceDayCalendarComponent } from './pages/resource-day-calendar/resource-day-calendar.component';
 import { SingleResourceCalendarComponent } from './pages/single-resource-calendar/single-resource-calendar.component';
 import { ApptListComponent } from './pages/crud/appt/appt-list/appt-list.component';
+import { LoginFormComponent } from './auth/login-form/login-form.component';
+import { PasswordFormComponent } from './auth/password-form/password-form.component';
 
 export const routes: Routes = [
-    { path: '', component: HomePageComponent, resolve: { data: ResolverService} },
+    { path: '', component: LoginFormComponent },
+    { path: 'p', component: PasswordFormComponent },
+    { path: 'home', component: HomePageComponent },
     { path: 'practices', component: PracticeListComponent, resolve: { data: ResolverService}  },
     { path: 'menus', component: MenuListComponent, resolve: { data: ResolverService} },
     { path: 'menu-items', component: MenuItemListComponent, resolve: { data: ResolverService} },

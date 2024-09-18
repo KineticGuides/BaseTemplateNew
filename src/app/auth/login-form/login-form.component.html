@@ -1,0 +1,24 @@
+<div style="margin-top:30px;" class="login-container">
+    <form action="index.html">
+        <div class="login-box">
+            <div class="login-form">
+                <a href="index.html" class="login-logo">
+                    <img src="assets/images/logo.svg" alt="Vico Admin" />
+                </a>
+                <div class="login-welcome">
+                    Welcome back, <br />Please login to your Kinetic Voice account.
+                </div>
+                <div class="mb-3">
+                    <!-- <div class="alert-box success">Login successful!</div> -->
+                    <!-- <div class="alert-box failure">Invalid Phone Number - Please Re-enter</div> -->
+                    <label class="form-label" style="color: black">Mobile Phone</label>
+                    <input style="background-color:white" name="phone" [(ngModel)]="formData.phone" type="tel"  (ngModelChange)="validatePhoneNumber($event)" pattern="[0-9]*" class="form-control"> 
+                </div>
+                <div class="login-form-actions">
+                    <button (click)="postForm();" (submit)="postForm();" type="submit" class="btn"> <span class="icon"> <i class="bi bi-arrow-right-circle"></i> </span>
+                        Login</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
