@@ -20,6 +20,7 @@
     "@angular/router": "^18.0.0",
     "@daypilot/daypilot-lite-angular": "^3.23.0",
     "@ng-bootstrap/ng-bootstrap": "^17.0.0",
+    "jquery": "^3.7.1",
     "ng-bootstrap": "^1.6.3",
     "ngx-bootstrap": "^18.0.2",
     "ngx-pagination": "^6.0.3",

@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+declare var $:any;
+
 @Component({
   selector: 'app-login-form',
   standalone: true,
@@ -36,6 +38,13 @@ export class LoginFormComponent  implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {  
+     const userId=localStorage.getItem('userId')
+     if (userId!==null) {
+      $('#sidebar-nav').show()
+      $('#sidebar-menu').show()
+      $('#top-header').show()
+      this.router.navigate(['/home']);
+     }
 
   }
 
@@ -50,8 +59,11 @@ export class LoginFormComponent  implements OnInit, AfterViewInit {
       if (data.error_code==0) {
           localStorage.setItem("uu",data.id)
           localStorage.setItem('userId', data.userId)
-          this.router.navigate(['/p']);
-          initializeTwilioClient();
+          this.router.navigate(['/home']);
+          (window as any).initializeTwilioClient();
+          $('#sidebar-nav').show()
+          $('#sidebar-menu').show()
+          $('#top-header').show()
       } else {
           //  $( "div.failure" ).fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
       }

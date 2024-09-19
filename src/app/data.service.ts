@@ -10,6 +10,7 @@ export class DataService {
 
   t: any;
   uid: any;
+  userId: any;
   url: any;
   menu: any;
   user: any;
@@ -24,13 +25,14 @@ export class DataService {
   current_practice: any;
 
   constructor(private http: HttpClient) { 
-    this.url='https://api.kineticcloud.ai/api/kmd_router.php';
+    this.url='https://voiceapi.kineticseas.com/api/kv_router.php';
     this.menu='https://api.kineticcloud.ai/api/kmd_menu.php';
     this.user='https://api.kineticcloud.ai/api/kmd_user.php';
     this.skipper='https://api.kineticcloud.ai/api/kmd_skipper.php';
   }
 
   getLocalStorage() {
+
     if (localStorage.getItem('uid')===null) {
       this.uid="0";
     } else {
@@ -41,6 +43,12 @@ export class DataService {
       this.un="";
     } else {
       this.un=localStorage.getItem('un')
+    }
+
+    if (localStorage.getItem('userId')===null) {
+      this.userId="";
+    } else {
+      this.userId=localStorage.getItem('userId')
     }
 
     if (localStorage.getItem('role')===null) {
@@ -72,18 +80,19 @@ export class DataService {
 
 
   getData(path: any, id: any, id2: any, id3: any) {
-    const data = {
-      "q" : path,
-      "id": id,
-      "id2": id2,
-      "id3": id3,      
-      "uid": this.uid
-    }
+      const data = {
+        "q" : path,
+        "id": id,
+        "id2": id2,
+        "id3": id3,   
+        "userId": "",   
+        "uid": this.uid
+      }
   
-  this.getLocalStorage();
-
-  this.t= this.http.post(this.url, data);
-  return this.t;
+      this.getLocalStorage();
+      data['userId'] = this.userId;
+      this.t= this.http.post(this.url, data);
+      return this.t;
 
   }
 
@@ -104,7 +113,7 @@ export class DataService {
     const data = {    
       "uid": this.uid
     }
-  this.t= this.http.post(this.user, data);
+    this.t= this.http.post(this.user, data);
   return this.t;
   }
 

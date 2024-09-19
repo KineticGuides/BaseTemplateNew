@@ -5,9 +5,9 @@ import { Subject, takeUntil } from 'rxjs';
 import { FormsModule,  FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../data.service'; 
-import { CalendarModule } from '../../calendar/calendar.module';
-import { ProviderCalendarModule } from '../../provider-calendar/provider-calendar.module';
 import { HeySkipperComponent } from '../../widgets/hey-skipper/hey-skipper.component';
+
+declare var $:any;
 
 @Component({
   selector: 'app-home-page',
@@ -34,6 +34,11 @@ export class HomePageComponent  implements OnInit {
           data })=> { 
           this.data=data;
       }) 
+      $('#sidebar-nav').show()
+      $('#sidebar-menu').show()
+      $('#top-header').show()
+      const userId = localStorage.getItem('userId')
+      $('#loginstatus').html('Connected As: ' + userId)
   }
 
   postForm(): void {

@@ -30,7 +30,7 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a [routerLink]="['/contacts']">
               <i class="bi bi-file-earmark-ruled"></i>
               <span class="menu-text">Contacts</span>
             </a>
@@ -47,6 +47,12 @@
               <span class="menu-text">Missed Calls</span>
             </a>
           </li>
+          <li>
+            <a href="#">
+              <i class="bi bi-file-font"></i>
+              <span (click)="logout()" class="menu-text">Logout</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -55,7 +61,7 @@
     </div>
   </nav>
   <div class="main-container">
-    <div class="row" style="display:none">
+    <div class="row" id="top-header" style="display:none">
       <div class="col-sm-12 col-12">
         <div class="profile-header">
         <h1>Kinetic Telecom</h1>
@@ -83,7 +89,7 @@
                    <span class="icon">
                       <i class="bi bi-telephone"></i>
                    </span>
-                   <h6><span id="incoming-call-number">No Active Call</span></h6>
+                   <h6><span class="caller" id="incoming-call-number">No Active Call</span></h6>
                  </div>
                 </div>
                </div>
@@ -94,6 +100,37 @@
             </div>
           </div>
       </div>
+    <div id="button-bar" class="col-xxl-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div  id="btn-answer-call"  style="display:none" onclick="answerCall();" class="award-tile shade-green">
+                <div class="award-icon">
+                  <i class="bi bi-receipt"></i>
+                </div>
+                <h3>Answer Call</h3>
+                <h4 class="caller"></h4>
+              </div>
+            </div>
+            <div class="col-6">
+              <div  id="btn-reject-call" style="display:none"  onclick="rejectCall();" class="award-tile shade-red">
+                <div class="award-icon">
+                  <i class="bi bi-receipt"></i>
+                </div>
+                <h3>Reject Call</h3>
+                <h4 class="caller"></h4>
+              </div>
+            </div>
+          </div>
+          <button id="btn-hang-up" type="button" class="btn btn-secondary m-2" style="display:none"> Hang Up </button>
+          <button id="btn-pickup-queue" type="button" class="btn btn-info m-2"> Pickup Queue </button>
+          <button onclick="showMakeCall();" id="btn-make-call m-2" type="button" class="btn btn-success"> Make Call </button>
+          <button onclick="refreshCallQueue();" id="btn-refresh-queue" type="button" class="btn btn-warning m-2"> Refresh Queue </button>
+          <button id="btn-merge-call" type="button" class="btn btn-warning" style="display:none m-2"> Merge Call </button>
+        </div>
+      </div>
+    </div>
     </div>
     <div class="content-wrapper-scroll">
           <router-outlet></router-outlet>
