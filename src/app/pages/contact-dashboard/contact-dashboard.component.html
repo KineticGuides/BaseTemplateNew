@@ -1,1 +1,42 @@
-<p>contact-dashboard works!</p>
+<div class="content-wrapper">
+    <!-- Row start -->
+    <div class="row">
+        <div class="col-12">
+            <h2>{{ data.formData['first_name'] }} {{ data.formData['last_name'] }}</h2>
+            <h3>{{ data.formData['contact_phone'] }}</h3>
+            <button>Edit</button>
+        </div>
+      <div class="col-12">
+        <!-- Row start -->
+        <div class="row" style="width:100%">
+                <div *ngFor="let m of data.list" class="col-lg-4 col-sm-6 col-12">
+                  <div [routerLink]="['/call-dashboard',m.id]" class="card border-primary" style="height:240px;">
+                    <div class="card-header" style="width:100%">
+                      <div class="row" style="width:100%">
+                          <div class="card-title text-primary">
+                            <span style="width:150px">
+                              {{ m.contact_name }}
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <p class="mb-2">{{ m.summary }}</p>
+                    </div>
+                    <div class="card-header" style="width:100%">
+                      <div class="row" style="width:100%">
+                          <div class="card-title text-primary">
+                            <span style="width:250px; text-align:right; font-size:12px;">
+                              {{ m.ts }}
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        </div>
+        <!-- Row end -->
+      </div>
+  
+      </div>
+      </div>

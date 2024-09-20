@@ -42,7 +42,7 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a [routerLink]="['/missed-calls']">
               <i class="bi bi-file-font"></i>
               <span class="menu-text">Missed Calls</span>
             </a>
@@ -124,13 +124,28 @@
             </div>
           </div>
           <button id="btn-hang-up" type="button" class="btn btn-secondary m-2" style="display:none"> Hang Up </button>
-          <button id="btn-pickup-queue" type="button" class="btn btn-info m-2"> Pickup Queue </button>
-          <button onclick="showMakeCall();" id="btn-make-call m-2" type="button" class="btn btn-success"> Make Call </button>
-          <button onclick="refreshCallQueue();" id="btn-refresh-queue" type="button" class="btn btn-warning m-2"> Refresh Queue </button>
-          <button id="btn-merge-call" type="button" class="btn btn-warning" style="display:none m-2"> Merge Call </button>
+          @if(showCall!='Y') {
+            <button (click)="toggleMakeCall();" id="btn-make-call m-2" type="button" class="btn btn-success"> Make Call </button>
+          }
+          <button onclick="refreshCallQueue();" id="btn-refresh-queue" type="button" style="display:none" class="btn btn-warning m-2"> Refresh Queue </button>
+          <button id="btn-merge-call" type="button" class="btn btn-warning m-2" style="display:none"> Merge Call </button>
         </div>
       </div>
     </div>
+    @if(showCall=='Y') {
+      <div class="col-xxl-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-2" style="text-align: right;">Number: </div>
+              <div class="col-2"><input type=text id="number" class="form-control"></div>
+              <div class="col-4" style="text-align: left;"><button class="btn btn-secondary ms-2">Place Call</button>
+              <button (click)="toggleMakeCall();" class="btn btn-light ms-2">Cancel</button></div>
+            </div>
+          </div>
+        </div>
+        </div>
+    }
     </div>
     <div class="content-wrapper-scroll">
           <router-outlet></router-outlet>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SidebarMenuComponent } from './sidebar-menu.component';
+import { MissedCallsComponent } from './missed-calls.component';
 
-describe('SidebarMenuComponent', () => {
-  let component: SidebarMenuComponent;
-  let fixture: ComponentFixture<SidebarMenuComponent>;
+describe('MissedCallsComponent', () => {
+  let component: MissedCallsComponent;
+  let fixture: ComponentFixture<MissedCallsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SidebarMenuComponent]
+      imports: [MissedCallsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SidebarMenuComponent);
+    fixture = TestBed.createComponent(MissedCallsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

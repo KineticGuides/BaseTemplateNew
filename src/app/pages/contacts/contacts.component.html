@@ -2,23 +2,6 @@
     <div class="row">
       <div class="col-xxl-12 col-sm-12 col-12">
         <div style="min-height: 900px;" class="card">
-          <div class="card-header">
-            <div style="width:100%" class="row">
-              <div class="col-10">
-                <ol class="breadcrumb d-lg-flex d-none">
-                  <li class="breadcrumb-item">
-                    <i class="bi bi-house"></i>
-                    <a [routerLink]="['/']">Home</a>
-                  </li>
-                  <li class="breadcrumb-item breadcrumb-active" aria-current="page">Contacts</li>
-                </ol>
-              </div>
-              <div class="col-2">
-                <button (click)="toggleAdd()" class="m-2 btn btn-primary"><i class="bi bi-clipboard-plus"></i></button>
-                <button (click)="reload()" class="m-2 btn btn-primary"><i class="bi bi-bootstrap-reboot"></i></button>
-              </div>
-            </div>
-          </div>
           @if (adding=='Y') {
           <div class="card-body">
                 <app-contact-form [path]="'contact-form'" [id]="this.id" (close)="toggleAdd();"></app-contact-form>
@@ -26,13 +9,20 @@
          }
           <div class="card-body">
             <div class="row mb-3">
-              <div class="col-sm-4 col-12">
+              <div class="col-sm-4">
                     <div class="m-0">
                       <label class="form-label">Search</label>
                       <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search">
                     </div>
+                </div>
+                <div class="col-sm-6" style="padding-top: 20px;">
+                    <h2>Contacts</h2>
+                  </div>
+                <div class="col-sm-2"  style="padding-top: 20px; text-align: right">
+                    <button (click)="toggleAdd()" class="m-2 btn btn-primary"><i class="bi bi-clipboard-plus"></i></button>
                   </div>
             </div>
+
             <div class="table-responsive">
                 <table class="table table-bordered m-0">
                   <thead>
@@ -52,7 +42,7 @@
                         <td>{{ m['formatted'] }}</td>
                         <td>{{ m['email'] }}</td>
                         <td style="width: 100px;">
-                            <button (click)="editItem(m)" class="btn btn-secondary">
+                            <button [routerLink]="['/contact-dashboard',m.id]" class="btn btn-secondary">
                               <i class="bi bi-card-list"></i>
                             </button>
                           </td>

@@ -8,13 +8,13 @@ import { DataService } from '../../data.service';
 import { HeySkipperComponent } from '../../widgets/hey-skipper/hey-skipper.component';
 
 @Component({
-  selector: 'app-contact-dashboard',
+  selector: 'app-call-dashboard',
   standalone: true,
   imports: [CommonModule, RouterLink, FormsModule, HeySkipperComponent],
-  templateUrl: './contact-dashboard.component.html',
-  styleUrl: './contact-dashboard.component.css'
+  templateUrl: './call-dashboard.component.html',
+  styleUrl: './call-dashboard.component.css'
 })
-export class ContactDashboardComponent implements OnInit {
+export class CallDashboardComponent   implements OnInit {
 
   data: any;
   message: any;
@@ -46,3 +46,4 @@ export class ContactDashboardComponent implements OnInit {
 
   }
 }
+
