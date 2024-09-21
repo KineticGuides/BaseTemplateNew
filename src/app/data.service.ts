@@ -123,7 +123,8 @@ export class DataService {
     const data = {
       "q" : path,
       "formData": formData,
-      "uid": this.uid
+      "uid": this.uid,
+      "userId": this.userId
     }
   this.t= this.http.post(this.url, data);
   return this.t;

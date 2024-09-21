@@ -1,43 +1,61 @@
 <div class="content-wrapper">
   <!-- Row start -->
+  <div class="row mb-3">
+    <div class="col-sm-4">
+          <div class="m-0">
+            <label class="form-label">Search</label>
+            <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search">
+          </div>
+      </div>
+      <div class="col-sm-6" style="padding-top: 20px;">
+          <h2></h2>
+        </div>
+      <div class="col-sm-2"  style="padding-top: 20px; text-align: right">
+        </div>
+  </div>
   <div class="row">
     <div class="col-12">
       <!-- Row start -->
       <div class="row" style="width:100%">
-              <div *ngFor="let m of data.list" class="col-lg-4 col-sm-6 col-12">
-                <div [routerLink]="['/call-dashboard',m.id]" class="card border-primary">
+              <div *ngFor="let m of data.list | searchFilter: searchText | paginate: { itemsPerPage: 40, currentPage: p }" class="col-lg-4 col-sm-6 col-12">
+                <div class="card border-primary">
                   <div class="card-header" style="width:100%">
                     <div class="row" style="width:100%">
-                      <div class="col-6">
+                      <div class="col-12">
                         <div class="card-title text-primary">
                           <span>
-                            {{ m.contact_name }}
-                            <button [routerLink]="['/contact-dash',m.id]" class="btn p-1"><i class="bi bi-file-earmark-person"></i></button>
+                            {{ m.contact_name }} <span style="font-size: 10px"> - ({{ m.Status }})</span>( {{ m.id}} )
                           </span>
                       </div>
                       </div>
-                      <div class="col-6" style="text-align: right!important;">
-                        <span>
-                          <button class="btn p-1" [routerLink]="['/call-dashboard',m.id]"><i class="bi bi-chat-right-text"></i></button>
-                          <button class="btn p-1"><i class="bi bi-archive"></i></button>
-                      </span>
-                    </div>
                     </div>
                   </div>
                   <div class="card-body pt-0 pb-0">
-                    <p class="mb-2">{{ m.summary }}</p>
+                    <div class="row">
+                      <div class="col-8">
+                        <p class="mb-2">{{ m.summary }}</p>
+                      </div>
+                      <div class="col-4">
+                        <button [routerLink]="['/call-dashboard',m.id]" class="btn btn-outline-primary pt-0 pb-0 mb-1 m-1" style="width:100%">View</button><br>
+                        <button [routerLink]="['/contact-dash',m.id]" class="btn btn-outline-primary pt-0 pb-0 mb-1 m-1" style="width:100%">Contact</button><br>
+                        <button (click)="hideCall(m)" class="btn btn-outline-danger pt-0 pb-0 mb-1 m-1" style="width:100%">Delete</button>
+                      </div>
+                    </div>
                   </div>
                   <div class="card-header" style="width:100%">
                     <div class="row" style="width:100%">
                         <div class="card-title text-primary">
                           <span style="width:250px; text-align:right; font-size:12px;">
-                            {{ m.ts }}
+                            {{ m.ts }} ({{ m.Direction }}) @if (m.Duration!='') { - {{ m.Duration }} seconds }
                           </span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+      </div>
+      <div class="row">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </div>
       <!-- Row end -->
     </div>

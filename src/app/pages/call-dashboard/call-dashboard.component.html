@@ -7,7 +7,13 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Summary</h3>
+                        <ol class="breadcrumb d-lg-flex d-none">
+                            <li class="breadcrumb-item">
+                              <i class="bi bi-house"></i>
+                              <a [routerLink]="['/']">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">Call Summary</li>
+                          </ol>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -22,8 +28,8 @@
                 <div class="card" style="width:99%">
                     <div class="card-header">
                         <div class="row" style="width: 99%">
-                            <div class="col-6"><h3>Call Log</h3></div>
-                            <div class="col-6" style="text-align: right"><button class="btn btn-primary">Contact</button></div>
+                            <div class="col-6"><h3 style="font-size:20px;">Call Log</h3></div>
+                            <div class="col-6" style="text-align: right"><button class="btn btn-outline-primary">View Contact</button></div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -63,15 +69,15 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h3>Notes</h3>
+                        <div class="row" style="width: 99%">
+                            <div class="col-6"><h3 style="font-size:20px;">Notes</h3></div>
+                            <div class="col-6" style="text-align: right"><button class="btn btn-outline-primary">Edit</button></div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-2">
-                                ID
-                            </div>
-                            <div class="col-4">
-                                {{ data.formData['id'] }}
+                            <div class="col-12">
+                                {{ data.formData['notes'] }}
                             </div>
                         </div>
                     </div>
@@ -80,41 +86,36 @@
             <div class="col-6">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Transcript</h3>
+                        <div class="row" style="width: 99%">
+                            <div class="col-6"><h3 style="font-size:20px;">Transcript</h3></div>
+                            <div class="col-6" style="text-align: right"><button class="btn btn-outline-danger">Resummarize</button></div>
+                        </div>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-2">
-                                ID
-                            </div>
-                            <div class="col-4">
-                                {{ data.formData['id'] }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-2">
-                                Time
-                            </div>
-                            <div class="col-8">
-                                {{ data.formData['ts'] }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-2">
-                                Direction
-                            </div>
-                            <div class="col-8">
-                                {{ data.formData['Direction'] }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-2">
-                                Called
-                            </div>
-                            <div class="col-8">
-                                {{ data.formData['callFrom'] }} ->  {{ data.formData['callTo'] }}  
-                            </div>
-                        </div>
+                        <div class="card">
+                            <div class="row" *ngFor="let m of data.sentences">
+                                @if(m.media_channel=='0') {
+                                    <div class="col-3">
+
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="alert alert-light" role="alert">
+                                            {{ m.transcript }}
+                                          </div>
+                                    </div>
+                                }
+                                @if(m.media_channel=='1') {
+                                    <div class="col-9">
+                                        <div class="alert alert-light" role="alert">
+                                            {{ m.transcript }}
+                                          </div>
+                                    </div>
+                                    <div class="col-3">
+
+                                    </div>
+                                }
+
+                          </div>
                     </div>
                 </div>
             </div>
