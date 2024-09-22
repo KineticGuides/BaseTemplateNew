@@ -29,36 +29,22 @@ $(function() {
 // });
 
 
-// Scroll 240
-$(function() {
-	$(".scroll240").overlayScrollbars({
-		scrollbars : {
-			visibility       : "auto",
-			autoHide         : "scroll",
-			autoHideDelay    : 200,
-			dragScrolling    : true,
-			clickScrolling   : false,
-			touchSupport     : true,
-			snapHandle       : false,
-		},
-	});
-});
 
 
 // Scroll 370
-$(function() {
-	$(".scroll370").overlayScrollbars({
-		scrollbars : {
-			visibility       : "auto",
-			autoHide         : "scroll",
-			autoHideDelay    : 200,
-			dragScrolling    : true,
-			clickScrolling   : false,
-			touchSupport     : true,
-			snapHandle       : false,
-		},
-	});
-});
+//$(function() {
+//	$(".scroll370").overlayScrollbars({
+//		scrollbars : {
+//			visibility       : "auto",
+//			autoHide         : "scroll",
+//			autoHideDelay    : 200,
+//			dragScrolling    : true,
+//			clickScrolling   : false,
+//			touchSupport     : true,
+//			snapHandle       : false,
+//		},
+//	});
+//});
 
 
 
