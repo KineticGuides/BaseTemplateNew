@@ -92,7 +92,8 @@
 
             device.on('incoming', (connection) => {
               $('#incoming-call-number').html('Incoming Call - ' + connection.parameters.From);
-              console.log('Incoming call from:', connection.parameters.From);
+              localStorage.setItem('caller', connection.parameters.From);
+              localStorage.setItem('ContactName', connection.parameters.ContactName);
               $('.caller').html(connection.parameters.From)
               incomingConnection = connection;
               showIncomingCallUI();
@@ -123,11 +124,17 @@ window.onload = function() {
 //initializeTwilioClient();
 };
 
+function formatPhoneNumber(phoneNumber) {
+    phoneNumber = phoneNumber.toString();
+    const formattedNumber = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6)}`;
+    return formattedNumber;
+}
+
 function login() {
     initializeTwilioClient();
     let u = "";
     u = localStorage.getItem('userId')
-    document.getElementById("loginstatus").innerHTML = "Logged in as : " + u;
+    document.getElementById("loginstatus").innerHTML = "Logged in as : " + formatPhoneNumber(u);
     localStorage.setItem('connected','Y');
     localStorage.setItem('online','Y');
     localStorage.setItem('userId',userId);
@@ -151,16 +158,20 @@ function logout() {
 }
 
 function showIncomingCallUI() {
+  $("#btn-make-call").hide();
   $("#incoming-call").show();
   $("#btn-answer-call").show();
   $("#btn-reject-call").show();
+  $("#btn-hang-up").hide();
   localStorage.setItem('incoming-call','Y');
 }
 
 function hideIncomingCallUI() {
+  $("#btn-make-call").show();
   $("#incoming-call").hide();
   $("#btn-answer-call").hide();
   $("#btn-reject-call").hide();
+  $("#btn-hang-up").hide();
   localStorage.setItem('incoming-call','N');
 }
   // Answer the incoming call
@@ -168,6 +179,9 @@ function hideIncomingCallUI() {
     if (incomingConnection) {
         $("#btn-answer-call").hide();
         $("#btn-reject-call").hide();
+        $("#make-call").hide();
+        $("#btn-hang-up").show();
+        $("#show-add-notes").show();
         incomingConnection.accept();
     }
   }

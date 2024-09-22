@@ -30,11 +30,12 @@ export class AddNotesFormComponent  implements OnInit, AfterViewInit {
   }
 
   closeIt() {
-   this.close.emit('N');
+   location.reload();
   }
 
   ngOnInit(): void {
 
+    this.id = localStorage.getItem('caller');
     this._dataService.getData(this.path, this.id, this.id2, this.id3).subscribe((data: any)=> { 
       this.data=data;
       this.formData=data['formData'];

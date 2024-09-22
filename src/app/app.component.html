@@ -18,15 +18,9 @@
           <div class="os-content" style="padding: 0px; height: 100%; width: 100%;">
         <ul>
           <li>
-            <a onclick="login()">
+            <a onclick="location.reload()">
               <i class="bi bi-headset"></i>
               <span class="menu-text">Reconnect</span>
-            </a>
-          </li>
-          <li>
-            <a onclick="logout()">
-              <i class="bi bi-hdd-stack"></i>
-              <span class="menu-text">Disconnect</span>
             </a>
           </li>
           <li>
@@ -123,9 +117,12 @@
               </div>
             </div>
           </div>
-          <button id="btn-hang-up" type="button" class="btn btn-secondary m-2" style="display:none"> Hang Up </button>
+          <div class="row" style="display:none; width:100%" id="show-add-notes">
+            <app-add-notes-form></app-add-notes-form>
+          </div>
+          <button id="btn-hang-up" onclick="hangUpCall()" type="button" class="btn btn-secondary m-2" style="display:none"> Hang Up </button>
           @if(showCall!='Y') {
-            <button (click)="toggleMakeCall();" id="btn-make-call m-2" type="button" class="btn btn-success"> Make Call </button>
+            <button (click)="toggleMakeCall();" id="btn-make-call" type="button" class="btn btn-success"> Make Call </button>
           }
           <button onclick="refreshCallQueue();" id="btn-refresh-queue" type="button" style="display:none" class="btn btn-warning m-2"> Refresh Queue </button>
           <button id="btn-merge-call" type="button" class="btn btn-warning m-2" style="display:none"> Merge Call </button>
