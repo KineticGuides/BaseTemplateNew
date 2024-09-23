@@ -9,6 +9,8 @@ import { HeySkipperComponent } from '../../widgets/hey-skipper/hey-skipper.compo
 import { SearchFilterPipe } from '../../search-filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+declare var $:any;
+
 @Component({
   selector: 'app-missed-calls',
   standalone: true,
@@ -32,6 +34,9 @@ export class MissedCallsComponent  implements OnInit {
 
   ngOnInit(): void
   {      
+    $('#sidebar-nav').show()
+    $('#sidebar-menu').show()
+    $('#top-header').show()
       this._activatedRoute.data.subscribe(({ 
           data })=> { 
           this.data=data;

@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../data.service'; 
 import { HeySkipperComponent } from '../../widgets/hey-skipper/hey-skipper.component';
 
+declare var $:any;
+
 @Component({
   selector: 'app-contact-dashboard',
   standalone: true,
@@ -27,7 +29,10 @@ export class ContactDashboardComponent implements OnInit {
 ) { }
 
   ngOnInit(): void
-  {      
+  {  
+    $('#sidebar-nav').show()
+    $('#sidebar-menu').show()
+    $('#top-header').show()    
       this._activatedRoute.data.subscribe(({ 
           data })=> { 
           this.data=data;

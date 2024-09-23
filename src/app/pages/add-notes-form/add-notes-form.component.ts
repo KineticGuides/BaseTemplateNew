@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+declare var $:any;
+
 @Component({
   selector: 'app-add-notes-form',
   standalone: true,

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+declare var $:any;
+
 declare global {
   interface Window {
     angularNavigate: (caller: any, sid: any) => void;

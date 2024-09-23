@@ -3,6 +3,8 @@ import { DataService } from '../../data.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+declare var $:any;
+
 @Component({
   selector: 'app-contact-form',
   standalone: true,
@@ -34,6 +36,10 @@ export class ContactFormComponent  implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
+    $('#sidebar-nav').show()
+    $('#sidebar-menu').show()
+    $('#top-header').show()
+    
     this._dataService.getData(this.path, this.id, this.id2, this.id3).subscribe((data: any)=> { 
       this.data=data;
       this.formData=data['formData'];

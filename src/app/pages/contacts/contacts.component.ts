@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../data.service'; 
 import { ContactFormComponent } from '../contact-form/contact-form.component';
 
+declare var $:any;
+
 @Component({
   selector: 'app-contacts',
   standalone: true,
@@ -34,6 +36,9 @@ export class ContactsComponent   implements OnInit {
 
   ngOnInit(): void
   {      
+    $('#sidebar-nav').show()
+    $('#sidebar-menu').show()
+    $('#top-header').show()
       this._activatedRoute.data.subscribe(({ 
           data })=> { 
           this.data=data;
