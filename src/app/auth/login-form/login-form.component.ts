@@ -34,7 +34,33 @@ export class LoginFormComponent  implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
+    //localStorage.removeItem('userId')
+    localStorage.removeItem('CallSid')
+    localStorage.removeItem('ContactName')
+    localStorage.removeItem('answerCall')
+    localStorage.removeItem('caller')
+    localStorage.removeItem('connect-queue')
+    localStorage.removeItem('connected')
+    localStorage.removeItem('online')
+    localStorage.removeItem('current_date')
+    localStorage.removeItem('current_day')
+    localStorage.removeItem('current_month')
+    localStorage.removeItem('practice')
+    localStorage.removeItem('doDisconnect')
+    localStorage.removeItem('doReconnect')
+    localStorage.removeItem('phone')
+    localStorage.removeItem('incoming-call')
+    localStorage.removeItem('current_practice')
+    localStorage.removeItem('current_year')
+    localStorage.removeItem('session')
+    localStorage.removeItem('uid')
+    localStorage.removeItem('uu')
+    localStorage.removeItem('connect-queue')
+    localStorage.removeItem('connected')
+    localStorage.removeItem('online')
+    localStorage.removeItem('organization')
+    localStorage.removeItem('role')
+    localStorage.removeItem('practice_id')
   }
 
   ngAfterViewInit(): void {  
@@ -58,12 +84,10 @@ export class LoginFormComponent  implements OnInit, AfterViewInit {
     this._dataService.postData("post-phone", this.formData).subscribe((data: any)=> { 
       if (data.error_code==0) {
           localStorage.setItem("uu",data.id)
-          localStorage.setItem('userId', data.userId)
-          this.router.navigate(['/home']);
+          localStorage.removeItem('userId')
+          localStorage.setItem('u', data.phone)
+          this.router.navigate(['/p']);
           (window as any).initializeTwilioClient();
-          $('#sidebar-nav').show()
-          $('#sidebar-menu').show()
-          $('#top-header').show()
       } else {
           //  $( "div.failure" ).fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
       }

@@ -34,6 +34,8 @@
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
   <script>
     let device;
+    let currentCallSid = '';
+    let currentCaller = '';
     //let userId='6304462620'; 
   
     async function getMediaPermissions() {
@@ -90,8 +92,12 @@
 
             device.on('incoming', (connection) => {
               $('#incoming-call-number').html('Incoming Call - ' + connection.parameters.From);
-              localStorage.setItem('caller', connection.parameters.From);
+              let cleanedNumber = connection.parameters.From.replace(/^\+1/, '');
               localStorage.setItem('CallSid', connection.parameters.CallSid);
+              localStorage.setItem('caller', cleanedNumber);
+              currentCallSid = connection.parameters.CallSid;
+              currentCaller = cleanedNumber;
+
               var i = connection.customParameters;
               localStorage.setItem('ContactName',i.get('ContactName'));
               $('.caller').html(connection.parameters.From + '<br>' + i.get('ContactName'))
@@ -184,6 +190,7 @@ function hideIncomingCallUI() {
         $("#btn-hang-up").show();
         $("#show-add-notes").show();
         incomingConnection.accept();
+        window.angularNavigate(currentCaller,currentCallSid);
     }
   }
 
@@ -224,9 +231,17 @@ function hideIncomingCallUI() {
   // Function to make an outgoing call
   function makeCall() {
     phone = document.getElementById('outphone').value;
+    console.log(phone);   
     const params = { To: phone, From: '+1' + userId }; // Specify the recipient
     device.connect(params);
-  }
+  } 
+
+  function makeCall2() {
+    phone = document.getElementById('outphone2').value;
+    console.log(phone);   
+    const params = { To: phone, From: '+1' + userId }; // Specify the recipient
+    device.connect(params);
+  } 
 
   // Function to hang up the call
   function hangUpCall() {

@@ -8,17 +8,23 @@ import { DataService } from '../../data.service';
 import { HeySkipperComponent } from '../../widgets/hey-skipper/hey-skipper.component';
 import { SearchFilterPipe } from '../../search-filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CallDashboardComponent } from '../call-dashboard/call-dashboard.component';
+import { CallNotesComponent } from '../../layout/call-notes/call-notes.component';
+import { AddNotesFormComponent } from '../add-notes-form/add-notes-form.component';
 
 declare var $:any;
 
+
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-active-call-page',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule, HeySkipperComponent, SearchFilterPipe, NgxPaginationModule],
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.css'
+  imports: [CommonModule, RouterLink, FormsModule, HeySkipperComponent, SearchFilterPipe, NgxPaginationModule, CallNotesComponent, AddNotesFormComponent],
+  templateUrl: './active-call-page.component.html',
+  styleUrl: './active-call-page.component.css'
 })
-export class HomePageComponent  implements OnInit {
+export class ActiveCallPageComponent implements OnInit {
+    caller: any;
+    callSid: any;
 
   data: any;
   txt: any;
@@ -26,6 +32,8 @@ export class HomePageComponent  implements OnInit {
   p: any = 1;
   searchText: string = '';
   calling: any = 'N';
+  showNotes: any = 'N';
+  contactUpdated: any = 'N';
 
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -61,6 +69,7 @@ export class HomePageComponent  implements OnInit {
       $('#outphone2').val(m.callBack);
       (window as any).makeCall2();
   }
+
   postForm(): void {
   
     let formData: any = { "message": this.message }
@@ -88,7 +97,23 @@ export class HomePageComponent  implements OnInit {
       } else {
         m.reply='Y';
       }
-
   }
 
+  toggleNotes(): void {
+    if (this.showNotes=='Y') {
+      this.showNotes='N';
+    } else {
+      this.showNotes='Y';
+    }
 }
+
+postContact(): void {
+  this._dataService.postData("post-edit-contact", this.data.contactData).subscribe((data: any)=> { 
+      this.contactUpdated = 'Y';
+}) 
+
+}
+
+
+}
+

@@ -1,8 +1,12 @@
 import { Component, AfterViewInit, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 import { DataService } from '../../data.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+
+declare var $:any;
+
+
 
 @Component({
   selector: 'app-password-form',
@@ -27,9 +31,7 @@ export class PasswordFormComponent   implements OnInit, AfterViewInit {
   @Input() id3: any = '';
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private _dataService: DataService) {
-
-  }
+  constructor(private _dataService: DataService, private router: Router) {}
 
   closeIt() {
    this.close.emit('N');
@@ -66,13 +68,18 @@ export class PasswordFormComponent   implements OnInit, AfterViewInit {
     }
     else
     {
+    const userId = localStorage.getItem('u')
+    this.formData['userId']=userId;
     this._dataService.postData("post-user-password", this.formData).subscribe((data: any)=> { 
-
       if (data.error_code=="0") {
-        localStorage.setItem("uid",data.id)
-        localStorage.setItem("role",data.role)
+        localStorage.setItem("uid",data.uid)
         localStorage.setItem("session",data.session)
-        location.replace("https://app.kineticmd.ai/app/index.html")
+        localStorage.setItem("userId",data.userId)
+        $('#sidebar-nav').show()
+        $('#sidebar-menu').show()
+        $('#top-header').show()
+        this.router.navigate(['/home']);
+
       }
       else
       {

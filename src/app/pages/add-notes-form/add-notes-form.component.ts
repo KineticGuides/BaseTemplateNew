@@ -18,11 +18,15 @@ export class AddNotesFormComponent  implements OnInit, AfterViewInit {
   colData: any = {country: "", languages: ""};
   keys: any;
   values: any;
+  notes: any = '';
 
   @Input() path: any = 'add-notes-form';
   @Input() id: any = '';
   @Input() id2: any = '';
   @Input() id3: any = '';
+  @Input() caller: any = '';
+  @Input() callerSid: any = '';
+
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private _dataService: DataService) {
@@ -30,19 +34,16 @@ export class AddNotesFormComponent  implements OnInit, AfterViewInit {
   }
 
   closeIt() {
-   location.reload();
+   this.close.emit('X');
   }
 
   ngOnInit(): void {
 
     this.id = localStorage.getItem('caller');
-    this._dataService.getData(this.path, this.id, this.id2, this.id3).subscribe((data: any)=> { 
+    this.callerSid = localStorage.getItem('CallSid');
+    this._dataService.getData(this.path, this.id, this.callerSid, this.id3).subscribe((data: any)=> { 
       this.data=data;
       this.formData=data['formData'];
-      this.colData=data['colData'];
-      this.keys = Object.keys(this.formData);
-      this.values = Object.entries(this.formData);
-      console.log(this.data['formData'])
   }) 
 
   }
@@ -73,11 +74,12 @@ export class AddNotesFormComponent  implements OnInit, AfterViewInit {
   }
   
   postForm(): void {
+    this.formData['callSid'] = this.callerSid;
+    this.formData['caller'] = this.caller;
+    this.formData['notes'] = this.notes;
     this._dataService.postData("post-add-notes-form", this.formData).subscribe((data: any)=> { 
-      //this.data=data;
-      //this.formData=data['formData'];
-      this.closeIt();
-      console.log(this.data)
+      this.data=data;
+      this.formData=data['formData'];
   }) 
 
   }

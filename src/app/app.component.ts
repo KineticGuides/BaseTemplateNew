@@ -4,11 +4,12 @@ import { RouterLink } from '@angular/router';
 import { PageFooterComponent } from './layout/page-footer/page-footer.component';
 import { DataService } from './data.service';
 import { AddNotesFormComponent } from './pages/add-notes-form/add-notes-form.component';
+import { ActiveCallComponent } from './pages/active-call/active-call.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, PageFooterComponent, RouterLink, AddNotesFormComponent],
+  imports: [RouterOutlet, PageFooterComponent, RouterLink, AddNotesFormComponent, ActiveCallComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

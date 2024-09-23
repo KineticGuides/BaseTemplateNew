@@ -94,12 +94,13 @@
                     <div class="card-body">
                         <div class="card">
                             <div class="row" *ngFor="let m of data.sentences">
-                                @if(m.media_channel=='0') {
+                                @if(m.media_channel=='2') {
                                     <div class="col-3">
 
                                     </div>
                                     <div class="col-9">
-                                        <div class="alert alert-light" role="alert">
+                                        <div class="alert alert-info" role="alert" style="background-color: #438bf6; color:white">
+
                                             {{ m.transcript }}
                                           </div>
                                     </div>

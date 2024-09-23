@@ -18,6 +18,12 @@
           <div class="os-content" style="padding: 0px; height: 100%; width: 100%;">
         <ul>
           <li>
+            <a [routerLink]="['/home']">
+              <i class="bi bi-file-earmark-ruled"></i>
+              <span class="menu-text">Home</span>
+            </a>
+          </li>
+          <li>
             <a onclick="location.reload()">
               <i class="bi bi-headset"></i>
               <span class="menu-text">Reconnect</span>
@@ -30,9 +36,9 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a [routerLink]="['/contacts']">
               <i class="bi bi-file-earmark-ruled"></i>
-              <span class="menu-text">Call History</span>
+              <span class="menu-text">SMS</span>
             </a>
           </li>
           <li>
@@ -118,7 +124,6 @@
             </div>
           </div>
           <div class="row" style="display:none; width:100%" id="show-add-notes">
-            <app-add-notes-form></app-add-notes-form>
           </div>
           <button id="btn-hang-up" onclick="hangUpCall()" type="button" class="btn btn-secondary m-2" style="display:none"> Hang Up </button>
           @if(showCall!='Y') {
@@ -135,8 +140,8 @@
           <div class="card-body">
             <div class="row">
               <div class="col-2" style="text-align: right;">Number: </div>
-              <div class="col-2"><input type=text id="number" class="form-control"></div>
-              <div class="col-4" style="text-align: left;"><button class="btn btn-secondary ms-2">Place Call</button>
+              <div class="col-2"><input type=text id="outphone" class="form-control"></div>
+              <div class="col-4" onclick="makeCall();" style="text-align: left;"><button class="btn btn-secondary ms-2">Place Call</button>
               <button (click)="toggleMakeCall();" class="btn btn-light ms-2">Cancel</button></div>
             </div>
           </div>
@@ -147,6 +152,7 @@
     <div class="content-wrapper-scroll">
           <router-outlet></router-outlet>
           <app-page-footer></app-page-footer>
+          <app-active-call></app-active-call>
     </div>
   </div>
 </div>
