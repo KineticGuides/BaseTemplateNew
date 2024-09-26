@@ -32,7 +32,7 @@ export class ActiveCallPageComponent implements OnInit {
   p: any = 1;
   searchText: string = '';
   calling: any = 'N';
-  showNotes: any = 'N';
+  showNotes: any = 'Y';
   contactUpdated: any = 'N';
 
   constructor(
@@ -44,6 +44,7 @@ export class ActiveCallPageComponent implements OnInit {
 
   ngOnInit(): void
   {      
+    this.showNotes='Y';
       this._activatedRoute.data.subscribe(({ 
           data })=> { 
           this.data=data;
@@ -61,6 +62,11 @@ export class ActiveCallPageComponent implements OnInit {
 
   hangUp(): void {
     location.reload();
+  }
+
+  reload(data: any) {
+    console.log(data);
+     this.data = data;
   }
 
 
@@ -100,6 +106,7 @@ export class ActiveCallPageComponent implements OnInit {
   }
 
   toggleNotes(): void {
+    this.showNotes='N';
     if (this.showNotes=='Y') {
       this.showNotes='N';
     } else {

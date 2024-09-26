@@ -91,4 +91,13 @@ export class HomePageComponent  implements OnInit {
 
   }
 
+  toggleSMS(m: any): void {
+    if (m.sms=='Y') {
+      m.sms='N';
+    } else {
+      m.sms='Y';
+    }
+
+}
+
 }

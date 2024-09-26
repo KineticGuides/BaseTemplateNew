@@ -30,6 +30,7 @@ export class AddNotesFormComponent  implements OnInit, AfterViewInit {
   @Input() callerSid: any = '';
 
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
+  @Output() reload: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private _dataService: DataService) {
 
@@ -76,11 +77,9 @@ export class AddNotesFormComponent  implements OnInit, AfterViewInit {
   }
   
   postForm(): void {
-    this.formData['callSid'] = this.callerSid;
-    this.formData['caller'] = this.caller;
-    this.formData['notes'] = this.notes;
+    console.log(this.data)
     this._dataService.postData("post-add-notes-form", this.formData).subscribe((data: any)=> { 
-      this.data=data;
+      this.reload.emit(data);
       this.formData=data['formData'];
   }) 
 

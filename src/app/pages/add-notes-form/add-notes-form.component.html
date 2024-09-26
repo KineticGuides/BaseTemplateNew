@@ -2,24 +2,19 @@
 <div class="card">
     <div class="card-header">
         <div class="col-4 p-1">
-            <h3 style="font-size:18px;" class="p-1">Add Notes</h3>
+            <h3 style="font-size:18px;" class="p-1">Add Call Note</h3>
         </div>
     </div>
     <div class="row" style="width:100%">
         <div class="col-sm-12 col-12">
-            <textarea style="width: 99%; height: 120px;" name="notes" [(ngModel)]="notes" type="text" class="form-control"></textarea>
+            <textarea style="width: 99%; height: 120px;" name="notes" [(ngModel)]="formData['notes']" type="text" class="form-control"></textarea>
         </div>
     </div>
     <div class="row">
         <div class="col-sm- col-12">
-            <div class="card">
-              <div class="card-body">
                 <div class="m-0">
-                    <button (click)="postForm()" class="m-2 btn btn-primary">Save Changes</button>
-                    <button (click)="closeIt()" class="btn btn-secondary m-2">Cancel</button>
+                    <button (click)="postForm()" class="m-2 btn btn-primary">Save Note</button>
                 </div>
-              </div>
-            </div>
         </div>
     </div>
     </div>

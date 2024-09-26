@@ -11,6 +11,7 @@ import { CallDashboardComponent } from './pages/call-dashboard/call-dashboard.co
 import { SettingsComponent } from './pages/settings/settings.component';
 import { MissedCallsComponent } from './pages/missed-calls/missed-calls.component';
 import { ActiveCallPageComponent } from './pages/active-call-page/active-call-page.component';
+import { SmsComponent } from './pages/sms/sms.component';
 
 export const routes: Routes = [
     { path: '', component: LoginFormComponent },
@@ -22,5 +23,6 @@ export const routes: Routes = [
     { path: 'contact-dash/:id', component: ContactDashboardComponent, resolve: { data: ResolverService}  },    
     { path: 'call-in-progress/:id/:id2', component: ActiveCallPageComponent, resolve: { data: ResolverService}  },
     { path: 'missed-calls', component: MissedCallsComponent, resolve: { data: ResolverService}  },
+    { path: 'sms', component: SmsComponent, resolve: { data: ResolverService}  },
     { path: 'settings', component: SettingsComponent, resolve: { data: ResolverService}  }
 ];

@@ -16,6 +16,7 @@ import { ActiveCallComponent } from './pages/active-call/active-call.component';
 export class AppComponent {
   title = 'BaseTemplate';
   showCall: any = 'N';
+  showText: any = 'N';
 
   userId: any = "";
 
@@ -29,6 +30,14 @@ export class AppComponent {
       this.showCall = 'Y';
     } else {
       this.showCall = 'N';
+    }
+  }
+
+  toggleSendText() {
+    if (this.showText=='N') {
+      this.showText = 'Y';
+    } else {
+      this.showText = 'N';
     }
   }
 

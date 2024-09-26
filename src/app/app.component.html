@@ -36,7 +36,7 @@
             </a>
           </li>
           <li>
-            <a [routerLink]="['/contacts']">
+            <a [routerLink]="['/sms']">
               <i class="bi bi-file-earmark-ruled"></i>
               <span class="menu-text">SMS</span>
             </a>
@@ -45,6 +45,12 @@
             <a [routerLink]="['/missed-calls']">
               <i class="bi bi-file-font"></i>
               <span class="menu-text">Missed Calls</span>
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/settings']">
+              <i class="bi bi-file-font"></i>
+              <span class="menu-text">Settings</span>
             </a>
           </li>
           <li>
@@ -64,7 +70,7 @@
     <div class="row" id="top-header" style="display:none">
       <div class="col-sm-12 col-12">
         <div class="profile-header">
-        <h1>Kinetic Telecom</h1>
+        <h1>Kinetic Voice Intelligence</h1>
            <div class="profile-header-content">
              <div class="profile-header-tiles">
                <div class="row">
@@ -127,7 +133,8 @@
           </div>
           <button id="btn-hang-up" onclick="hangUpCall()" type="button" class="btn btn-secondary m-2" style="display:none"> Hang Up </button>
           @if(showCall!='Y') {
-            <button (click)="toggleMakeCall();" id="btn-make-call" type="button" class="btn btn-success"> Make Call </button>
+            <button (click)="toggleMakeCall();" id="btn-make-call" type="button" class="btn btn-success m-2"> Make Call </button>
+            <button (click)="toggleSendText();" id="btn-make-call" type="button" class="btn btn-success m-2"> Send Text </button>
           }
           <button onclick="refreshCallQueue();" id="btn-refresh-queue" type="button" style="display:none" class="btn btn-warning m-2"> Refresh Queue </button>
           <button id="btn-merge-call" type="button" class="btn btn-warning m-2" style="display:none"> Merge Call </button>
