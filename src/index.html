@@ -82,7 +82,7 @@
             device.on('ready', (device) => {
               console.log('Twilio Device is ready to make/receive calls');
               $('#incoming-call-number').html('No Active Call');
-              post_online_status('Y');
+              connectWS();
             });             
                   
             device.on('disconnect', (device) => {
@@ -309,7 +309,10 @@ setInterval(function() {
 
 </script>
 <script>
-  let socket = new WebSocket("wss://wss8880.sqllabs.ai/websocket");
+  function connectWS() {
+
+  let channel = localStorage.getItem('userId')
+  let socket = new WebSocket("wss://wss8880.sqllabs.ai/websocket/" + channel);
   const HEARTBEAT_INTERVAL = 30000; // 30 seconds
   
   socket.onopen = function(e) {
@@ -330,8 +333,6 @@ setInterval(function() {
     if (event.wasClean) {
       console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
     } else {
-      // e.g. server process killed or network down
-      // event.code is usually 1006 in this case
       console.log('[close] Connection died');
     }
   };
@@ -339,6 +340,7 @@ setInterval(function() {
   socket.onerror = function(error) {
     console.log(`[websocket error]` + error);
   };
+}
   </script>
     </body>
   
